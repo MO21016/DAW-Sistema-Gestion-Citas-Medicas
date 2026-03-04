@@ -46,3 +46,4 @@ Este sistema puede ser implementado en clínicas pequeñas y medianas en El Salv
 | Nombre | Carnet |
 |--------|--------|
 | Jason Alexander Molina Ortiz | MO21016 |
+| Marlon Alexis Núñez Ramos | NR24002 |
