@@ -1,0 +1,12 @@
+# Backend
+target/
+*.log
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
