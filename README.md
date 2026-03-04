@@ -1,3 +1,5 @@
+
+
 # Sistema de Gestión de Citas Médicas
 
 Sistema web integral basado en arquitectura Cliente-Servidor desacoplada para la gestión de citas médicas entre pacientes y profesionales de la salud
@@ -46,3 +48,4 @@ Este sistema puede ser implementado en clínicas pequeñas y medianas en El Salv
 | Nombre | Carnet |
 |--------|--------|
 | Jason Alexander Molina Ortiz | MO21016 |
+| Cindy Ariana Reyes Molina    | RM24001 |
