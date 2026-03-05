@@ -48,3 +48,4 @@ Este sistema puede ser implementado en clínicas pequeñas y medianas en El Salv
 | Jason Alexander Molina Ortiz | MO21016 |
 | Rodrigo Ernesto Garcia Portillo | GP24005 |
 | Hugo Fernando Canizales Andrade| CA18052 |
+| Marlon Alexis Núñez Ramos | NR24002 |
