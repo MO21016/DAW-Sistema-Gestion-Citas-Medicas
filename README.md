@@ -49,3 +49,4 @@ Este sistema puede ser implementado en clínicas pequeñas y medianas en El Salv
 | Rodrigo Ernesto Garcia Portillo | GP24005 |
 | Hugo Fernando Canizales Andrade| CA18052 |
 | Marlon Alexis Núñez Ramos | NR24002 |
+| Cindy Ariana Reyes Molina | RM24001 |
