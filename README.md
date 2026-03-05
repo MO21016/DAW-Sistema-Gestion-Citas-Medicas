@@ -18,7 +18,6 @@ El sistema implementa validaciones de negocio complejas, manejo profesional de r
 En El Salvador, muchas clínicas privadas, consultorios médicos y centros de salud aún gestionan sus citas mediante agendas físicas, hojas de cálculo o sistemas no integrados
 
 Esto provoca problemas como:
-
 * Doble reservación de horarios
 * Falta de control sobre disponibilidad real de los médicos
 * Pérdida de información histórica de pacientes
@@ -26,9 +25,7 @@ Esto provoca problemas como:
 * Procesos manuales propensos a errores
 
 
-
 El Sistema de Gestión de Citas Médicas permite:
-
 * Administrar médicos y sus especialidades
 * Registrar pacientes y mantener historial organizado
 * Controlar disponibilidad real con validaciones automáticas
@@ -46,10 +43,8 @@ Este sistema puede ser implementado en clínicas pequeñas y medianas en El Salv
 
 ## Equipo de Desarrollo
 
-|Nombre|Carnet|
-|-|-|
-|Jason Alexander Molina Ortiz|MO21016|
-|Hugo Fernando Canizales Andrade|CA18052|
-
-
-
+| Nombre | Carnet |
+|--------|--------|
+| Jason Alexander Molina Ortiz | MO21016 |
+| Rodrigo Ernesto Garcia Portillo | GP24005 |
+| Hugo Fernando Canizales Andrade| CA18052 |
