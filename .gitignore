@@ -13,4 +13,7 @@ Thumbs.db
 
 backend/target/
 .idea/
+
+# Files
 DAW-Sistema-Gestion-Citas-Medicas.iml
+backend/src/main/resources/application.properties
