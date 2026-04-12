@@ -32,14 +32,6 @@ public class Especialidad {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Relación Many-to-Many con Medico
-    @ManyToMany(mappedBy = "especialidades")
-    private List<Medico> medicos;
-
-    // Relación One-to-Many con Cita
-    @OneToMany(mappedBy = "especialidad")
-    private List<Cita> citas;
-
     // Método para establecer timestamps automáticamente
     @PrePersist
     protected void onCreate() {
