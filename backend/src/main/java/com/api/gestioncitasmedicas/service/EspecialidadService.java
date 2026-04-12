@@ -5,7 +5,6 @@ import com.api.gestioncitasmedicas.dto.CrearEspecialidadDTO;
 import com.api.gestioncitasmedicas.dto.EspecialidadDTO;
 import com.api.gestioncitasmedicas.entity.Especialidad;
 import com.api.gestioncitasmedicas.repository.EspecialidadRepository;
-import com.api.gestioncitasmedicas.repository.MedicoEspecialidadRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 public class EspecialidadService {
 
     private final EspecialidadRepository especialidadRepository;
-    private final MedicoEspecialidadRepository medicoEspecialidadRepository;
+//    private final MedicoEspecialidadRepository medicoEspecialidadRepository;
 
     // Listar todas las especialidades
     public List<EspecialidadDTO> obtenerTodas() {
@@ -76,14 +75,6 @@ public class EspecialidadService {
         Especialidad especialidad = especialidadRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada con ID: " + id));
 
-        // Verificar que no tenga médicos asociados
-        long medicosAsociados = medicoEspecialidadRepository.findByIdEspecialidad(id).size();
-        if (medicosAsociados > 0) {
-            throw new RuntimeException(
-                    "No se puede eliminar la especialidad porque tiene " + medicosAsociados + " médicos asociados"
-            );
-        }
-
         especialidadRepository.delete(especialidad);
     }
 
@@ -93,12 +84,6 @@ public class EspecialidadService {
         dto.setIdEspecialidad(especialidad.getIdEspecialidad());
         dto.setNombreEspecialidad(especialidad.getNombreEspecialidad());
         dto.setDescripcion(especialidad.getDescripcion());
-
-        // Calcular cantidad de médicos
-        int cantidadMedicos = medicoEspecialidadRepository
-                .findByIdEspecialidad(especialidad.getIdEspecialidad())
-                .size();
-        dto.setCantidadMedicos(cantidadMedicos);
 
         return dto;
     }
