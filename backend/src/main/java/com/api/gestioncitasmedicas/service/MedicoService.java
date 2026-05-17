@@ -6,6 +6,7 @@ import com.api.gestioncitasmedicas.dto.MedicoDTO;
 import com.api.gestioncitasmedicas.entity.Especialidad;
 import com.api.gestioncitasmedicas.entity.Medico;
 import com.api.gestioncitasmedicas.entity.MedicoEspecialidad;
+import com.api.gestioncitasmedicas.repository.CitaRepository;
 import com.api.gestioncitasmedicas.repository.MedicoEspecialidadRepository;
 import com.api.gestioncitasmedicas.repository.MedicoRepository;
 import com.api.gestioncitasmedicas.repository.EspecialidadRepository;
@@ -22,6 +23,7 @@ public class MedicoService {
     private final MedicoRepository medicoRepository;
     private final MedicoEspecialidadRepository medicoEspecialidadRepository;
     private final EspecialidadRepository especialidadRepository;
+    private final CitaRepository citaRepository;
 
     // Listar todos los médicos
     public List<MedicoDTO> obtenerTodos() {
@@ -90,6 +92,13 @@ public class MedicoService {
         Medico medico = medicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Médico no encontrado con ID: " + id));
 
+        // Verificar que no tenga citas asociadas
+        long citasAsociadas = citaRepository.countByMedicoIdMedico(id);
+        if (citasAsociadas > 0) {
+            throw new RuntimeException(
+                    "No se puede eliminar el médico porque tiene " + citasAsociadas + " citas asociadas"
+            );
+        }
 
         // Eliminar las relaciones médico-especialidad primero
         medicoEspecialidadRepository.deleteAllByIdMedico(id);

@@ -47,6 +47,9 @@ public class Medico {
     )
     private List<Especialidad> especialidades;
 
+    // Relación One-to-Many con Cita
+    @OneToMany(mappedBy = "medico")
+    private List<Cita> citas;
 
     @PrePersist
     protected void onCreate() {
