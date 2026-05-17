@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,7 +33,8 @@ public class Cita {
     private String motivoCita;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado_cita", nullable = false)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)                              // ← Indica que es un enum nativo de PostgreSQL
+    @Column(name = "estado_cita", nullable = false, columnDefinition = "estado_cita_enum")  // ← Nombre exacto del tipo en tu DB
     private EstadoCita estadoCita;
 
     @Column(name = "created_at", updatable = false)
@@ -40,17 +43,14 @@ public class Cita {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Relación Many-to-One con Paciente
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_paciente", nullable = false)
     private Paciente paciente;
 
-    // Relación Many-to-One con Medico
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_medico", nullable = false)
     private Medico medico;
 
-    // Relación Many-to-One con Especialidad
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especialidad", nullable = false)
     private Especialidad especialidad;
@@ -69,7 +69,6 @@ public class Cita {
         updatedAt = LocalDateTime.now();
     }
 
-    // Enum simple para los estados de la cita
     public enum EstadoCita {
         PENDIENTE,
         CONFIRMADA,
