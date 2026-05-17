@@ -1,21 +1,18 @@
-# Nombre de la aplicación
-spring.application.name=gestioncitasmedicas
-
-# Configuración del servidor
+# ConfiguraciÃ³n del servidor
 server.port=8080
 
-# Configuración de PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/gestion_citas_medicas
-spring.datasource.username=postgres
-spring.datasource.password=4672
+# ConfiguraciÃ³n de PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/nombre_base_de_datos
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseÃ±a
 spring.datasource.driver-class-name=org.postgresql.Driver
 
-# Configuración de JPA/Hibernate
+# ConfiguraciÃ³n de JPA/Hibernate
 spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
-# Swagger Configuration
+# Swagger
 springdoc.swagger-ui.tags-sorter=alpha
 springdoc.swagger-ui.operations-sorter=method
 
@@ -23,6 +20,6 @@ springdoc.swagger-ui.operations-sorter=method
 logging.level.org.hibernate.SQL=DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
 
-# Configuración para manejar fechas
+# Fechas
 spring.jackson.serialization.write-dates-as-timestamps=false
 spring.jackson.time-zone=America/El_Salvador

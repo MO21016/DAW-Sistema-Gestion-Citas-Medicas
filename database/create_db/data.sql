@@ -68,29 +68,79 @@ INSERT INTO paciente (nombre_paciente, apellido_paciente, fecha_nacimiento, tele
 ('Fernando', 'Vargas', '1970-11-22', '70007788', 'fernando.vargas@email.com');
 
 -- ============================================
--- CITAS (20 citas de ejemplo)
+-- CITAS 2026
+-- Pasadas al 17 de mayo (COMPLETADA / CANCELADA)
+-- Hoy 17 de mayo (CONFIRMADA / PENDIENTE)
+-- Futuras desde 18 de mayo (PENDIENTE / CONFIRMADA)
 -- ============================================
 INSERT INTO cita (fecha_cita, hora_cita, motivo_cita, estado_cita, id_paciente, id_medico, id_especialidad) VALUES
-('2025-10-15', '08:00:00', 'Chequeo cardiológico de rutina', 'CONFIRMADA'::estado_cita_enum, 1, 1, 1),
-('2025-10-15', '09:00:00', 'Control de crecimiento', 'CONFIRMADA'::estado_cita_enum, 7, 2, 2),
-('2025-10-15', '10:00:00', 'Consulta por acné', 'CONFIRMADA'::estado_cita_enum, 4, 3, 3),
-('2025-10-15', '14:00:00', 'Dolor de rodilla', 'CONFIRMADA'::estado_cita_enum, 3, 4, 4),
-('2025-10-16', '08:00:00', 'Control prenatal', 'CONFIRMADA'::estado_cita_enum, 6, 5, 5),
-('2025-10-17', '08:00:00', 'Revisión de vista', 'PENDIENTE'::estado_cita_enum, 8, 6, 6),
-('2025-10-17', '09:00:00', 'Dolor de cabeza recurrente', 'PENDIENTE'::estado_cita_enum, 9, 7, 7),
-('2025-10-17', '10:00:00', 'Consulta por ansiedad', 'PENDIENTE'::estado_cita_enum, 10, 8, 8),
-('2025-10-17', '14:00:00', 'Chequeo general', 'PENDIENTE'::estado_cita_enum, 2, 9, 9),
-('2025-10-18', '08:00:00', 'Limpieza dental', 'PENDIENTE'::estado_cita_enum, 11, 10, 10),
-('2025-10-01', '08:00:00', 'Electrocardiograma', 'COMPLETADA'::estado_cita_enum, 5, 1, 1),
-('2025-10-02', '09:00:00', 'Vacunación infantil', 'COMPLETADA'::estado_cita_enum, 11, 12, 2),
-('2025-10-03', '10:00:00', 'Tratamiento dermatológico', 'COMPLETADA'::estado_cita_enum, 12, 3, 3),
-('2025-10-04', '14:00:00', 'Fisioterapia', 'COMPLETADA'::estado_cita_enum, 13, 4, 4),
-('2025-10-05', '08:00:00', 'Ecografía', 'COMPLETADA'::estado_cita_enum, 14, 5, 5),
-('2025-10-20', '08:00:00', 'Consulta oftalmológica', 'CANCELADA'::estado_cita_enum, 15, 6, 6),
-('2025-10-20', '09:00:00', 'Evaluación neurológica', 'CANCELADA'::estado_cita_enum, 1, 7, 7),
-('2025-10-20', '10:00:00', 'Terapia psicológica', 'CANCELADA'::estado_cita_enum, 2, 8, 8),
-('2025-10-21', '08:00:00', 'Consulta general', 'CANCELADA'::estado_cita_enum, 3, 9, 9),
-('2025-10-21', '09:00:00', 'Extracción dental', 'CANCELADA'::estado_cita_enum, 4, 10, 10);
+
+-- ── ENERO 2026 ── (COMPLETADAS y CANCELADAS)
+('2026-01-05', '08:00:00', 'Control cardiológico anual',            'COMPLETADA'::estado_cita_enum,  1,  1,  1),
+('2026-01-06', '09:00:00', 'Revisión de crecimiento infantil',      'COMPLETADA'::estado_cita_enum,  7,  2,  2),
+('2026-01-07', '10:00:00', 'Consulta por dermatitis',               'COMPLETADA'::estado_cita_enum,  4,  3,  3),
+('2026-01-08', '11:00:00', 'Dolor lumbar crónico',                  'CANCELADA'::estado_cita_enum,   3,  4,  4),
+('2026-01-09', '14:00:00', 'Control prenatal primer trimestre',     'COMPLETADA'::estado_cita_enum,  6,  5,  5),
+('2026-01-12', '08:30:00', 'Revisión de presión intraocular',       'CANCELADA'::estado_cita_enum,   8,  6,  6),
+('2026-01-13', '09:30:00', 'Migraña persistente',                   'COMPLETADA'::estado_cita_enum,  9,  7,  7),
+('2026-01-14', '10:30:00', 'Seguimiento de terapia psiquiátrica',   'COMPLETADA'::estado_cita_enum, 10,  8,  8),
+
+-- ── FEBRERO 2026 ── (COMPLETADAS y CANCELADAS)
+('2026-02-03', '08:00:00', 'Chequeo general preventivo',           'COMPLETADA'::estado_cita_enum,  2,  9,  9),
+('2026-02-04', '09:00:00', 'Ortodoncia inicial',                   'COMPLETADA'::estado_cita_enum, 11, 10, 10),
+('2026-02-05', '10:00:00', 'Electrocardiograma de esfuerzo',       'COMPLETADA'::estado_cita_enum,  5,  1,  1),
+('2026-02-06', '11:00:00', 'Vacunación infantil refuerzo',         'CANCELADA'::estado_cita_enum,  11, 12,  2),
+('2026-02-10', '14:00:00', 'Tratamiento de psoriasis',             'COMPLETADA'::estado_cita_enum, 12,  3,  3),
+('2026-02-11', '08:00:00', 'Rehabilitación de rodilla',            'COMPLETADA'::estado_cita_enum, 13,  4,  4),
+('2026-02-12', '09:00:00', 'Ecografía ginecológica',               'CANCELADA'::estado_cita_enum,  14,  5,  5),
+
+-- ── MARZO 2026 ── (COMPLETADAS y CANCELADAS)
+('2026-03-02', '08:00:00', 'Examen de fondo de ojo',               'COMPLETADA'::estado_cita_enum, 15,  6,  6),
+('2026-03-03', '09:00:00', 'EEG - Estudio neurológico',            'COMPLETADA'::estado_cita_enum,  1,  7,  7),
+('2026-03-04', '10:00:00', 'Consulta por depresión',               'COMPLETADA'::estado_cita_enum,  2,  8,  8),
+('2026-03-05', '11:00:00', 'Consulta gripal con complicaciones',   'CANCELADA'::estado_cita_enum,   3,  9,  9),
+('2026-03-09', '14:00:00', 'Extracción de muela del juicio',       'COMPLETADA'::estado_cita_enum,  4, 10, 10),
+('2026-03-10', '08:30:00', 'Arritmia cardíaca - seguimiento',      'COMPLETADA'::estado_cita_enum,  5, 11,  1),
+('2026-03-11', '09:30:00', 'Control pediátrico de rutina',         'CANCELADA'::estado_cita_enum,   7, 12,  2),
+
+-- ── ABRIL 2026 ── (COMPLETADAS y CANCELADAS)
+('2026-04-01', '08:00:00', 'Dermatoscopia de lunares',             'COMPLETADA'::estado_cita_enum,  6,  3,  3),
+('2026-04-02', '09:00:00', 'Fractura de tobillo - control',        'COMPLETADA'::estado_cita_enum,  8,  4,  4),
+('2026-04-07', '10:00:00', 'Papanicolaou y colposcopia',           'CANCELADA'::estado_cita_enum,   9,  5,  5),
+('2026-04-08', '11:00:00', 'Cirugía de cataratas - evaluación',    'COMPLETADA'::estado_cita_enum, 10,  6,  6),
+('2026-04-09', '14:00:00', 'Neuropatía diabética',                 'COMPLETADA'::estado_cita_enum, 11,  7,  7),
+('2026-04-14', '08:00:00', 'Trastorno bipolar - ajuste dosis',     'CANCELADA'::estado_cita_enum,  12,  8,  8),
+('2026-04-15', '09:00:00', 'Chequeo ejecutivo completo',           'COMPLETADA'::estado_cita_enum, 13,  9,  9),
+
+-- ── MAYO 2026 ANTES DE HOY (1–16) ── (COMPLETADAS y CANCELADAS)
+('2026-05-02', '08:00:00', 'Implante dental - revisión',           'COMPLETADA'::estado_cita_enum, 14, 10, 10),
+('2026-05-05', '09:00:00', 'Holter cardiaco - resultados',         'COMPLETADA'::estado_cita_enum, 15,  1,  1),
+('2026-05-06', '10:00:00', 'Control de talla y peso pediátrico',   'COMPLETADA'::estado_cita_enum,  7,  2,  2),
+('2026-05-07', '11:00:00', 'Rosácea - tratamiento tópico',         'CANCELADA'::estado_cita_enum,   4,  3,  3),
+('2026-05-12', '14:00:00', 'Esguince de hombro',                   'COMPLETADA'::estado_cita_enum,  3,  4,  4),
+('2026-05-13', '08:30:00', 'Control embarazo 32 semanas',          'COMPLETADA'::estado_cita_enum,  6,  5,  5),
+('2026-05-14', '09:30:00', 'Glaucoma - revisión de presión',       'CANCELADA'::estado_cita_enum,   1,  6,  6),
+('2026-05-15', '10:30:00', 'Cefalea tensional - seguimiento',      'COMPLETADA'::estado_cita_enum,  9,  7,  7),
+('2026-05-16', '11:30:00', 'Ansiedad generalizada - sesión',       'COMPLETADA'::estado_cita_enum, 10,  8,  8),
+
+-- ── HOY 17 DE MAYO 2026 ── (CONFIRMADA y PENDIENTE)
+('2026-05-17', '08:00:00', 'Consulta por diabetes tipo 2',         'CONFIRMADA'::estado_cita_enum,  2,  9,  9),
+('2026-05-17', '09:00:00', 'Limpieza dental profunda',             'CONFIRMADA'::estado_cita_enum,  5, 10, 10),
+('2026-05-17', '10:00:00', 'Dolor precordial - evaluación',        'PENDIENTE'::estado_cita_enum,  13,  1,  1),
+('2026-05-17', '11:00:00', 'Fiebre y dolor de garganta (niño)',    'PENDIENTE'::estado_cita_enum,  11, 12,  2),
+('2026-05-17', '14:00:00', 'Manchas en piel - diagnóstico',        'CONFIRMADA'::estado_cita_enum, 14,  3,  3),
+
+-- ── FUTURAS DESDE 18 DE MAYO 2026 ── (PENDIENTE y CONFIRMADA)
+('2026-05-19', '08:00:00', 'Fisioterapia columna vertebral',       'CONFIRMADA'::estado_cita_enum,  8,  4,  4),
+('2026-05-20', '09:00:00', 'Ecografía obstétrica',                 'PENDIENTE'::estado_cita_enum,   6,  5,  5),
+('2026-05-21', '10:00:00', 'Revisión post-operatoria de ojo',      'CONFIRMADA'::estado_cita_enum, 15,  6,  6),
+('2026-05-22', '11:00:00', 'Epilepsia - control neurológico',      'PENDIENTE'::estado_cita_enum,  12,  7,  7),
+('2026-05-26', '08:00:00', 'Psicosis - evaluación inicial',        'CONFIRMADA'::estado_cita_enum,  2,  8,  8),
+('2026-05-27', '09:00:00', 'Chequeo general anual',                'PENDIENTE'::estado_cita_enum,   3,  9,  9),
+('2026-06-03', '10:00:00', 'Blanqueamiento dental',                'PENDIENTE'::estado_cita_enum,   4, 10, 10),
+('2026-06-10', '08:00:00', 'Marcapasos - control trimestral',      'CONFIRMADA'::estado_cita_enum,  1, 11,  1),
+('2026-06-17', '09:00:00', 'Vacunas viaje internacional (niño)',   'PENDIENTE'::estado_cita_enum,   7,  2,  2),
+('2026-07-01', '10:00:00', 'Revisión dermatológica anual',         'PENDIENTE'::estado_cita_enum,   9,  3,  3);
 
 -- ============================================
 -- Verificación
@@ -100,3 +150,4 @@ SELECT COUNT(*) AS total_especialidades FROM especialidad;
 SELECT COUNT(*) AS total_medicos FROM medico;
 SELECT COUNT(*) AS total_pacientes FROM paciente;
 SELECT COUNT(*) AS total_citas FROM cita;
+SELECT estado_cita, COUNT(*) AS total FROM cita GROUP BY estado_cita ORDER BY estado_cita;

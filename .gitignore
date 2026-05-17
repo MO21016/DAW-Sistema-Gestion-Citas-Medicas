@@ -1,19 +1,32 @@
-# Backend
+# ============================================
+# BACKEND
+# ============================================
 target/
+backend/target/
 *.log
+backend/src/main/resources/application.properties
 
-# Frontend
-node_modules/
-dist/
-build/
+# ============================================
+# FRONTEND
+# ============================================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
 
+# ============================================
+# IDE
+# ============================================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# ============================================
 # OS
+# ============================================
 .DS_Store
 Thumbs.db
-
-backend/target/
-.idea/
-
-# Files excluded
-DAW-Sistema-Gestion-Citas-Medicas.iml
-backend/src/main/resources/application.properties
