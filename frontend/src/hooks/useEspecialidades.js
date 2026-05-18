@@ -4,46 +4,46 @@ import { especialidadService } from '../services/especialidadService';
 
 export const useEspecialidades = () => {
 
-    const [especialidades, setEspecialidades] = useState([]);
+  const [especialidades, setEspecialidades] = useState([]);
 
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
-    const loadEspecialidades = async () => {
+  const loadEspecialidades = async () => {
 
-        try {
+    try {
 
-            setLoading(true);
+      setLoading(true);
 
-            const data = await especialidadService.getAll();
+      const data = await especialidadService.getAll();
 
-            setEspecialidades(data);
+      setEspecialidades(data);
 
-        } catch (err) {
+    } catch (err) {
 
-            setError(err.message);
+      setError(err.message);
 
-        } finally {
+    } finally {
 
-            setLoading(false);
+      setLoading(false);
 
-        }
+    }
 
-    };
+  };
 
-    useEffect(() => {
+  useEffect(() => {
 
-        loadEspecialidades();
+    loadEspecialidades();
 
-    }, []);
+  }, []);
 
-    return {
-        especialidades,
-        setEspecialidades,
-        loading,
-        error,
-        reload: loadEspecialidades
-    };
+  return {
+    especialidades,
+    setEspecialidades,
+    loading,
+    error,
+    reload: loadEspecialidades
+  };
 
 };
