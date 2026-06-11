@@ -1041,3 +1041,12 @@ textarea {
   position: relative;
   min-height: 100vh;
 }
+.error-message {
+  margin: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #ffe5e5;
+  color: #b00020;
+  border: 1px solid #ffb3b3;
+  font-weight: 500;
+}
