@@ -1,2024 +1,2093 @@
 {
-	"info": {
-		"_postman_id": "eac25738-624c-4ae2-9e7a-3a5631606840",
-		"name": "Gestión Citas Médicas API",
-		"description": "API REST para gestión de citas médicas - Proyecto POO",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "49197961",
-		"_collection_link": "https://mo21016-9784426.postman.co/workspace/Jason-Alexander-Molina-Ortiz's-~3ed64dbd-b747-4919-853b-8093712f6583/collection/49197961-eac25738-624c-4ae2-9e7a-3a5631606840?action=share&source=collection_link&creator=49197961"
-	},
-	"item": [
-		{
-			"name": "HealthCheck",
-			"item": [
-				{
-					"name": "Health",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/info",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"info"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Pacientes",
-			"item": [
-				{
-					"name": "Listar todos los pacientes",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener un paciente por ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Paciente que NO existe",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar pacientes por nombre",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/buscar?termino=ana",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"buscar"
-							],
-							"query": [
-								{
-									"key": "termino",
-									"value": "ana"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear un paciente nuevo",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Laura\",\n  \"apellidoPaciente\": \"Ramírez\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70009999\",\n  \"correoPaciente\": \"laura.ramirez@email.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Nombre Vacío",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"\",\n  \"apellidoPaciente\": \"Test\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Fecha de nacimiento futura",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"2030-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Teléfono inválido",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"123\",\n  \"correoPaciente\": \"test@test.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Correo inválido",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoMedico\": \"no-es-email\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Correo duplicado",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Otro\",\n  \"apellidoPaciente\": \"Paciente\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"ana.martinez@email.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar un paciente",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Laura María\",\n  \"apellidoPaciente\": \"Ramírez García\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70008888\",\n  \"correoPaciente\": \"lauramaria.ramirez@email.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/16",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualización parcial (solo teléfono)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"telefonoPaciente\": \"70007777\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/16",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cambiar fecha de nacimiento (recalcula edad)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"fechaNacimiento\": \"2000-01-01\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/16",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar paciente que no existe",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombrePaciente\": \"Test\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar paciente SIN citas",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/16",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"16"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Intentar eliminar paciente CON citas",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/pacientes/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"pacientes",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Especialidades",
-			"item": [
-				{
-					"name": "Obtener todas las Especialidades",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener una Especialidad en específico",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener una Especialidad que NO existe",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear una especialidad nueva",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreEspecialidad\": \"Oncología\",\n  \"descripcion\": \"Tratamiento médico del cáncer\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Nombre vacío",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreEspecialidad\": \"\",\n  \"descripcion\": \"Test\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Nombre duplicado",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreEspecialidad\": \"Cardiología\",\n  \"descripcion\": \"Ya existe\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar una Especialidad",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreEspecialidad\": \"Oncología Médica\",\n  \"descripcion\": \"Tratamiento médico del cáncer con quimioterapia y radioterapia\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/11",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualización parcial (solo descripción)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"descripcion\": \"Nueva descripción actualizada\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/11",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Especialidad que no existe",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreEspecialidad\": \"Test\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar especialidad sin médicos",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/11",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Intentar eliminar especialidad CON médicos",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/especialidades/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"especialidades",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Medicos",
-			"item": [
-				{
-					"name": "Listar todos los médicos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener un médico por ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Médico que NO existe",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener especialidades de un médico",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/1/especialidades",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"1",
-								"especialidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear un médico nuevo",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"Juan\",\n  \"apellidoMedico\": \"Pérez\",\n  \"telefonoMedico\": \"77009999\",\n  \"correoMedico\": \"juan.perez@hospital.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Nombre Vacío",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"\",\n  \"apellidoMedico\": \"Test\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"test@test.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Teléfono Inválido",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"Test\",\n  \"apellidoMedico\": \"Usuario\",\n  \"telefonoMedico\": \"123\",\n  \"correoMedico\": \"test@test.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Correo Inválido",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"Test\",\n  \"apellidoMedico\": \"Usuario\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"no-es-email\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Correo Duplicado",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"Otro\",\n  \"apellidoMedico\": \"Médico\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"carlos.rodriguez@hospital.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar un médico",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombreMedico\": \"Juan Carlos\",\n  \"apellidoMedico\": \"Pérez García\",\n  \"telefonoMedico\": \"77008888\",\n  \"correoMedico\": \"juancarlos.perez@hospital.com\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/13",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"13"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualización parcial (solo teléfono)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"telefonoMedico\": \"77007777\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/13",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"13"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Médico que no existe",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"telefonoMedico\": \"77007777\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/999",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"999"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar médico SIN citas",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/13",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"13"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Intentar eliminar médico CON citas",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/medicos/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"medicos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Citas",
-			"item": [
-				{
-					"name": "Listar todas las citas",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener una cita por ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Filtrar citas por médico",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas?medico=1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							],
-							"query": [
-								{
-									"key": "medico",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Filtrar citas por paciente",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas?paciente=1",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							],
-							"query": [
-								{
-									"key": "paciente",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Filtrar citas por estado",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas?estado=PENDIENTE",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							],
-							"query": [
-								{
-									"key": "estado",
-									"value": "PENDIENTE"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear una cita VÁLIDA",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta general de seguimiento\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Médico sin esa especialidad ",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 5,\n  \"fechaCita\": \"2025-11-11\",\n  \"horaCita\": \"10:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Fin de semana (sábado)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-08\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Fin de semana (domingo)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-09\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Hora de almuerzo (12:00)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"12:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Horario inválido (17:00)",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"17:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Médico ocupado (duplicado) ",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 2,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-12\",\n  \"horaCita\": \"14:00:00\",\n  \"motivoCita\": \"Primera cita\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Fecha en el pasado",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2020-01-01\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validación - Campos obligatorios",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cambiar estado PENDIENTE → CONFIRMADA",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nuevoEstado\": \"CONFIRMADA\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21",
-								"estado"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cambiar estado CONFIRMADA → COMPLETADA",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nuevoEstado\": \"COMPLETADA\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21",
-								"estado"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cambiar estado COMPLETADA → PENDIENTE",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nuevoEstado\": \"PENDIENTE\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21",
-								"estado"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Estado inválido",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nuevoEstado\": \"HELLOWORLD\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21",
-								"estado"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar fecha y hora de cita",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"fechaCita\": \"2025-11-28\",\n  \"horaCita\": \"13:00:00\",\n  \"motivoCita\": \"Consulta actualizada\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/22?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"22"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Intentar actualizar cita COMPLETADA",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"motivoCita\": \"Intento de actualización\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21?Content-Type=application/json",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21"
-							],
-							"query": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar cita PENDIENTE",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/22",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"22"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Intentar eliminar cita COMPLETADA",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}{{api_path}}/citas/21",
-							"host": [
-								"{{base_url}}{{api_path}}"
-							],
-							"path": [
-								"citas",
-								"21"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "eac25738-624c-4ae2-9e7a-3a5631606840",
+    "name": "Gestión Citas Médicas API",
+    "description": "API REST para gestión de citas médicas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49197961",
+    "_collection_link": "https://go.postman.co/collection/49197961-eac25738-624c-4ae2-9e7a-3a5631606840?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "HealthCheck",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/info",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "info"
+              ]
+            },
+            "description": "## Health / API Info\n\nReturns general information about the API, including the project name, version, developer team, and a brief description of the system.\n\nThis endpoint can be used to verify that the server is running and to retrieve basic metadata about the application.\n\n---\n\n### Request\n\n**Method:** `GET`  \n**URL:** `http://localhost:8080/api/info`  \n**Auth:** None required  \n**Body:** None\n\n---\n\n### Response\n\n**Status:** `200 OK`\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `descripcion` | string | Brief description of the system |\n| `desarrollador` | string | Name of the development team |\n| `proyecto` | string | Project name |\n| `version` | string | Current API version |\n\n**Example Response:**\n\n``` json\n{\n  \"descripcion\": \"Sistema para gestionar citas médicas con...\",\n  \"desarrollador\": \"Equipo G9\",\n  \"proyecto\": \"API REST - DAW\",\n  \"version\": \"1.0.0\"\n}\n\n ```"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Especialidades",
+      "item": [
+        {
+          "name": "Obtener todas las Especialidades",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades"
+              ]
+            },
+            "description": "## Obtener todas las Especialidades\n\nRecupera el listado completo de especialidades médicas registradas en el sistema. Este endpoint no requiere parámetros ni cuerpo de solicitud.\n\n---\n\n### Detalles del Endpoint\n\n| Campo        | Valor                                  |\n|--------------|----------------------------------------|\n| **Método**   | `GET`                                  |\n| **URL**      | `{{base_url}}{{api_path}}/especialidades` |\n| **Autenticación** | No requerida                      |\n\n---\n\n### Parámetros\n\nEste endpoint **no requiere** parámetros de ruta, parámetros de consulta ni cuerpo de solicitud.\n\n---\n\n### Respuesta Exitosa — `200 OK`\n\nDevuelve un arreglo JSON con todos los objetos de especialidad disponibles en el sistema.\n\n#### Estructura de cada objeto en el arreglo\n\n| Campo               | Tipo      | Descripción                                                  |\n|---------------------|-----------|--------------------------------------------------------------|\n| `idEspecialidad`    | `integer` | Identificador único de la especialidad médica.               |\n| `nombreEspecialidad`| `string`  | Nombre de la especialidad médica.                            |\n| `descripcion`       | `string`  | Descripción breve del área de atención de la especialidad.   |\n| `cantidadMedicos`   | `integer` | Número de médicos actualmente asociados a esta especialidad. |\n\n#### Ejemplo de respuesta\n\n```json\n[\n  {\n    \"idEspecialidad\": 1,\n    \"nombreEspecialidad\": \"Cardiología\",\n    \"descripcion\": \"Diagnóstico y tratamiento de enfermedades del corazón\",\n    \"cantidadMedicos\": 2\n  },\n  {\n    \"idEspecialidad\": 2,\n    \"nombreEspecialidad\": \"Pediatría\",\n    \"descripcion\": \"Atención médica de bebés, niños y adolescentes\",\n    \"cantidadMedicos\": 2\n  },\n  {\n    \"idEspecialidad\": 3,\n    \"nombreEspecialidad\": \"Dermatología\",\n    \"descripcion\": \"Diagnóstico y tratamiento de enfermedades de la piel\",\n    \"cantidadMedicos\": 1\n  },\n  {\n    \"idEspecialidad\": 9,\n    \"nombreEspecialidad\": \"Medicina General\",\n    \"descripcion\": \"Atención médica integral y preventiva\",\n    \"cantidadMedicos\": 5\n  }\n]\n```\n\n---\n\n### Posibles Códigos de Respuesta\n\n| Código | Descripción                                                                 |\n|--------|-----------------------------------------------------------------------------|\n| `200 OK` | La solicitud fue exitosa. Se retorna el arreglo de especialidades.        |\n| `500 Internal Server Error` | Error interno del servidor al procesar la solicitud.     |"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener una Especialidad en específico",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "1"
+              ]
+            },
+            "description": "## Obtener una Especialidad en específico\n\nRetorna la información detallada de una especialidad médica identificada por su ID único.\n\n---\n\n### Método y URL\n\n**GET** `{{base_url}}{{api_path}}/especialidades/{id}`\n\n---\n\n### Variables de entorno\n\n| Variable | Descripción |\n|---|---|\n| `base_url` | URL base del servidor (ej. `http://localhost:8000`) |\n| `api_path` | Prefijo de la ruta de la API (ej. `/api/v1`) |\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo | Requerido | Descripción |\n|---|---|---|---|\n| `id` | Entero | ✅ Sí | Identificador único de la especialidad a consultar |\n\n> En la URL de ejemplo, el valor `1` representa el ID de la especialidad que se desea obtener.\n\n---\n\n### Comportamiento esperado\n\nAl enviar una solicitud con un ID válido, el servidor responde con los datos completos de la especialidad correspondiente, incluyendo su nombre, descripción y cualquier otro atributo asociado.\n\n---\n\n### Respuestas posibles\n\n| Código | Estado | Descripción |\n|---|---|---|\n| `200 OK` | Éxito | La especialidad fue encontrada y se retornan sus datos en el cuerpo de la respuesta |\n| `404 Not Found` | No encontrado | No existe ninguna especialidad con el ID proporcionado |"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener una Especialidad que NO existe",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "999"
+              ]
+            },
+            "description": "## Obtener una Especialidad que NO existe\n\nEste endpoint intenta recuperar una especialidad médica utilizando un ID que **no existe** en el sistema. Su propósito es validar que la API maneja correctamente las solicitudes de recursos inexistentes, retornando el código de error apropiado.\n\n**Método HTTP:** `GET`\n**URL:** `{{base_url}}{{api_path}}/especialidades/999`\n\n---\n\n### Parámetro de ruta\n\n| Parámetro | Tipo    | Descripción                                                                 |\n|-----------|---------|-----------------------------------------------------------------------------|\n| `999`     | Integer | ID no existente utilizado para provocar intencionalmente un error 404. Este valor no corresponde a ninguna especialidad registrada en el sistema. |\n\n---\n\n### Respuesta esperada\n\n**Código de estado:** `404 Not Found`\n\nLa API debe retornar un error indicando que la especialidad solicitada no fue encontrada. Esto confirma que el sistema valida correctamente la existencia del recurso antes de intentar devolverlo.\n\n---\n\n### Caso de uso\n\nEste request se utiliza para verificar que la API implementa correctamente el manejo de errores para recursos inexistentes. Es una prueba esencial para garantizar que el sistema no retorna respuestas vacías o códigos de éxito incorrectos cuando se consulta un ID que no existe en la base de datos."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear una especialidad nueva",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreEspecialidad\": \"Oncología\",\n  \"descripcion\": \"Tratamiento médico del cáncer\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades"
+              ]
+            },
+            "description": "## Crear una nueva especialidad médica\n\nEste endpoint permite registrar una nueva especialidad médica en el sistema. Se debe enviar la información de la especialidad en el cuerpo de la solicitud en formato JSON.\n\n### Campos del cuerpo de la solicitud\n\n| Campo | Tipo | Requerido | Descripción |\n|---|---|---|---|\n| `nombreEspecialidad` | `string` | ✅ Sí | Nombre de la especialidad médica (ej. `\"Oncología\"`). Debe ser único en el sistema. |\n| `descripcion` | `string` | ✅ Sí | Descripción breve de la especialidad médica (ej. `\"Tratamiento médico del cáncer\"`). |\n\n### Ejemplo de solicitud\n\n```json\n{\n  \"nombreEspecialidad\": \"Oncología\",\n  \"descripcion\": \"Tratamiento médico del cáncer\"\n}\n```\n\n### Respuesta exitosa\n\nEn caso de éxito, el servidor retorna un código **`201 Created`** junto con el objeto de la especialidad recién creada, incluyendo el identificador único asignado por el sistema.\n\n### Posibles errores\n\n- **`400 Bad Request`** — Si alguno de los campos requeridos está vacío o ausente.\n- **`409 Conflict`** — Si ya existe una especialidad con el mismo nombre (`nombreEspecialidad` duplicado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Nombre vacío",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreEspecialidad\": \"\",\n  \"descripcion\": \"Test\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades"
+              ]
+            },
+            "description": "## Validación - Nombre vacío\n\nEste caso de prueba verifica que la API aplica correctamente la validación del campo `nombreEspecialidad` cuando se envía vacío al crear una nueva especialidad.\n\n### Descripción\n\nSe realiza una solicitud `POST` al endpoint `/especialidades` con el campo `nombreEspecialidad` vacío (`\"\"`). El objetivo es confirmar que el servidor rechaza la solicitud y devuelve un error de validación apropiado, en lugar de crear un registro inválido en la base de datos.\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"nombreEspecialidad\": \"\",\n  \"descripcion\": \"Test\"\n}\n```\n\n| Campo              | Valor  | Observación                                      |\n|--------------------|--------|--------------------------------------------------|\n| `nombreEspecialidad` | `\"\"`   | **Inválido** — el campo no puede estar vacío     |\n| `descripcion`      | `\"Test\"` | Valor válido, no es la causa del error           |\n\n### Comportamiento esperado\n\n- **Código de estado:** `400 Bad Request`\n- **Respuesta:** El servidor debe retornar un mensaje de error indicando que el campo `nombreEspecialidad` es obligatorio y no puede estar vacío.\n\n### Regla de validación probada\n\nEl campo `nombreEspecialidad` es **requerido** y no acepta cadenas vacías. Esta validación garantiza la integridad de los datos al momento de registrar una nueva especialidad médica en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Nombre duplicado",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreEspecialidad\": \"Cardiología\",\n  \"descripcion\": \"Ya existe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades"
+              ]
+            },
+            "description": "## Validación - Nombre duplicado\n\nEste request verifica que la API rechaza correctamente el intento de crear una especialidad médica cuyo nombre ya existe en el sistema.\n\n### Propósito\n\nComprobar que el sistema aplica la restricción de unicidad sobre el campo `nombreEspecialidad`. Si se intenta registrar una especialidad con un nombre que ya está almacenado en la base de datos, la API debe devolver un error indicando que el nombre está duplicado.\n\n### Comportamiento esperado\n\nLa API debe responder con un código de estado **400 Bad Request** o **409 Conflict**, acompañado de un mensaje de error que indique que ya existe una especialidad con el nombre proporcionado.\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"nombreEspecialidad\": \"Cardiología\",\n  \"descripcion\": \"Ya existe\"\n}\n```\n\n- **`nombreEspecialidad`**: Nombre de una especialidad que ya se encuentra registrada en el sistema (en este caso, `\"Cardiología\"`), lo que debe desencadenar el error de duplicado.\n- **`descripcion`**: Valor de prueba utilizado para completar el campo requerido; no es relevante para la validación en sí.\n\n### Notas\n\n- Este caso de prueba es parte de las validaciones de integridad de datos del módulo de especialidades.\n- Asegúrese de que la especialidad `\"Cardiología\"` exista previamente en el sistema antes de ejecutar este request, o ejecútelo después del request **\"Crear una especialidad nueva\"** que la registra."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar una Especialidad",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreEspecialidad\": \"Oncología Médica\",\n  \"descripcion\": \"Tratamiento médico del cáncer con quimioterapia y radioterapia\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/11",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "11"
+              ]
+            },
+            "description": "## Actualizar una Especialidad\n\nActualiza completamente los datos de una especialidad médica existente mediante su identificador único en la URL.\n\n---\n\n### Método y Endpoint\n\n**PUT** `{{base_url}}{{api_path}}/especialidades/:id`\n\n> En este ejemplo se actualiza la especialidad con ID `11`.\n\n---\n\n### Encabezados de la Solicitud\n\n| Clave          | Valor              | Descripción                                      |\n|----------------|--------------------|--------------------------------------------------|\n| `Content-Type` | `application/json` | Indica que el cuerpo de la solicitud es JSON.    |\n\n---\n\n### Cuerpo de la Solicitud (JSON)\n\n```json\n{\n  \"nombreEspecialidad\": \"Oncología Médica\",\n  \"descripcion\": \"Tratamiento médico del cáncer con quimio...\"\n}\n```\n\n| Campo               | Tipo     | Requerido | Descripción                                              |\n|---------------------|----------|-----------|----------------------------------------------------------|\n| `nombreEspecialidad`| `string` | ✅ Sí     | Nombre actualizado de la especialidad médica.            |\n| `descripcion`       | `string` | ✅ Sí     | Descripción actualizada del área de la especialidad.     |\n\n> **Nota:** Al ser una solicitud `PUT`, se reemplaza el recurso completo. Ambos campos deben enviarse en cada solicitud.\n\n---\n\n### Respuestas Esperadas\n\n| Código | Estado      | Descripción                                                                 |\n|--------|-------------|-----------------------------------------------------------------------------|\n| `200`  | OK          | La especialidad fue actualizada exitosamente. Se retorna el recurso actualizado. |\n| `400`  | Bad Request | Los datos enviados no son válidos (por ejemplo, nombre vacío o duplicado).  |\n| `404`  | Not Found   | No existe una especialidad con el ID proporcionado.                         |\n| `500`  | Server Error| Error interno del servidor.                                                 |\n\n---\n\n### Notas Adicionales\n\n- Este endpoint realiza una actualización **completa** del recurso (reemplazo total). Si se omite algún campo, podría quedar vacío o nulo según la implementación del servidor.\n- El ID de la especialidad se pasa como **parámetro de ruta** en la URL.\n- Asegúrese de que el `nombreEspecialidad` no esté duplicado con otra especialidad existente en el sistema."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualización parcial (solo descripción)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descripcion\": \"Nueva descripción actualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/11",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "11"
+              ]
+            },
+            "description": "## Actualización parcial de una Especialidad (solo descripción)\n\nPerforms a partial update on an existing medical specialty, modifying **only** the `descripcion` field. All other fields of the specialty (such as the name) remain unchanged.\n\n---\n\n### HTTP Method & URL\n\n```\nPUT {{base_url}}{{api_path}}/especialidades/11\n```\n\n---\n\n### Headers\n\n| Key            | Value              | Description                              |\n|----------------|--------------------|------------------------------------------|\n| `Content-Type` | `application/json` | Indicates the request body is JSON format |\n\n---\n\n### Request Body\n\nSend a JSON object containing only the field(s) you wish to update:\n\n```json\n{\n  \"descripcion\": \"Nueva descripción actualizada\"\n}\n```\n\n| Field         | Type     | Required | Description                                      |\n|---------------|----------|----------|--------------------------------------------------|\n| `descripcion` | `string` | Yes      | The new description to assign to the specialty   |\n\n---\n\n### Expected Response\n\nOn success, the API returns the updated specialty object reflecting the new description. The HTTP status code is typically `200 OK`.\n\n**Example response:**\n```json\n{\n  \"id\": 11,\n  \"nombre\": \"Cardiología\",\n  \"descripcion\": \"Nueva descripción actualizada\"\n}\n```\n\n---\n\n### Notes\n\n- Only the `descripcion` field is updated by this request — all other fields (e.g., `nombre`) remain unchanged.\n- The specialty is identified by its ID in the URL path (`/especialidades/11`). Replace `11` with the actual specialty ID as needed.\n- If the specialty with the given ID does not exist, the API will return a `404 Not Found` error.\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Especialidad que no existe",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreEspecialidad\": \"Test\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "999"
+              ]
+            },
+            "description": "## Especialidad que no existe\n\nEste request intenta **actualizar una especialidad médica que no existe** en el sistema, utilizando un ID inválido (`999`). Su propósito es validar que la API maneja correctamente los recursos inexistentes y retorna el error apropiado.\n\n### Detalles del Request\n\n| Campo       | Valor                                          |\n|-------------|------------------------------------------------|\n| **Método**  | `PUT`                                          |\n| **Endpoint**| `{{base_url}}{{api_path}}/especialidades/999`  |\n\n### Cuerpo de la Solicitud\n\n```json\n{\n  \"nombreEspecialidad\": \"Test\"\n}\n```\n\n### Comportamiento Esperado\n\nLa API debe retornar un error **`404 Not Found`**, indicando que la especialidad con ID `999` no existe en el sistema y, por lo tanto, no puede ser actualizada.\n\n### Propósito\n\nVerificar que la API implementa correctamente el manejo de errores para recursos inexistentes, asegurando que no se realicen operaciones sobre datos que no existen y que el cliente reciba una respuesta clara y descriptiva del error."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar especialidad sin médicos",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/11",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "11"
+              ]
+            },
+            "description": "## Eliminar una Especialidad sin Médicos Asociados\n\nEste endpoint permite **eliminar una especialidad médica** del sistema, identificada por su ID en la URL. La operación solo se lleva a cabo si la especialidad **no tiene médicos asignados**.\n\n---\n\n### Detalles del Endpoint\n\n| Campo   | Valor                                      |\n|---------|--------------------------------------------|\n| Método  | `DELETE`                                   |\n| URL     | `{{base_url}}{{api_path}}/especialidades/11` |\n\n---\n\n### Condición de Eliminación\n\nLa especialidad **debe estar libre de médicos asociados** para que la eliminación sea permitida. Si existen médicos vinculados a la especialidad, el servidor rechazará la solicitud con un error apropiado (por ejemplo, `409 Conflict` o `400 Bad Request`).\n\n---\n\n### Respuesta Exitosa\n\nCuando la especialidad existe y no tiene médicos asignados, el servidor responde con:\n\n- **`200 OK`** o **`204 No Content`**: La especialidad ha sido eliminada correctamente del sistema.\n\n---\n\n### Notas Importantes\n\n- Esta operación es **irreversible**; una vez eliminada la especialidad, no puede recuperarse.\n- Si el ID proporcionado no corresponde a ninguna especialidad existente, se retornará un error `404 Not Found`.\n- Para eliminar una especialidad que sí tiene médicos asociados, primero se deben reasignar o eliminar dichos médicos."
+          },
+          "response": []
+        },
+        {
+          "name": "Intentar eliminar especialidad CON médicos",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/especialidades/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "especialidades",
+                "1"
+              ]
+            },
+            "description": "## Intentar eliminar una Especialidad CON médicos asociados\n\nEste request intenta eliminar una especialidad médica que **tiene médicos asociados**, con el objetivo de verificar que la API rechace correctamente la operación.\n\n### Comportamiento esperado\n\nLa API **debe denegar la eliminación** y retornar un error (por ejemplo, `400 Bad Request` o `409 Conflict`), indicando que no es posible eliminar la especialidad mientras existan médicos vinculados a ella.\n\n### Propósito\n\nValidar que la API aplica correctamente la **integridad referencial**, impidiendo la eliminación de especialidades que se encuentran en uso. Esto garantiza la consistencia de los datos y evita referencias huérfanas en el sistema.\n\n### Detalles del request\n\n| Campo   | Valor                                      |\n|---------|--------------------------------------------|\n| Método  | `DELETE`                                   |\n| URL     | `{{base_url}}{{api_path}}/especialidades/1` |\n\n### Respuesta esperada\n\n- **Código de estado:** `400 Bad Request` o `409 Conflict`\n- **Cuerpo:** Mensaje de error indicando que la especialidad no puede eliminarse porque tiene médicos asociados."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Medicos",
+      "item": [
+        {
+          "name": "Listar todos los médicos",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Listar todos los médicos\n\nRetorna la lista completa de médicos registrados en el sistema, incluyendo sus especialidades asignadas.\n\n---\n\n### Detalles del endpoint\n\n| Campo   | Valor |\n|---------|-------|\n| **Método** | `GET` |\n| **URL** | `{{base_url}}{{api_path}}/medicos` |\n\n---\n\n### Headers de la solicitud\n\n| Header | Valor |\n|--------|-------|\n| `Content-Type` | `application/json` |\n\n---\n\n### Respuesta exitosa — `200 OK`\n\nDevuelve un arreglo JSON con los objetos de cada médico.\n\n#### Estructura de cada objeto\n\n| Campo | Tipo | Descripción |\n|-------|------|-------------|\n| `idMedico` | `integer` | Identificador único del médico |\n| `nombreMedico` | `string` | Nombre del médico |\n| `apellidoMedico` | `string` | Apellido del médico |\n| `telefonoMedico` | `string` | Número de teléfono de contacto |\n| `correoMedico` | `string` | Correo electrónico del médico |\n| `especialidades` | `array<string>` | Lista de especialidades médicas asignadas |\n| `cantidadEspecialidades` | `integer` | Número total de especialidades asignadas |\n\n#### Ejemplo de respuesta\n\n```json\n[\n  {\n    \"idMedico\": 1,\n    \"nombreMedico\": \"Carlos\",\n    \"apellidoMedico\": \"Rodríguez\",\n    \"telefonoMedico\": \"77001234\",\n    \"correoMedico\": \"carlos.rodriguez@hospital.com\",\n    \"especialidades\": [\"Cardiología\", \"Medicina General\"],\n    \"cantidadEspecialidades\": 2\n  },\n  {\n    \"idMedico\": 2,\n    \"nombreMedico\": \"María\",\n    \"apellidoMedico\": \"González\",\n    \"telefonoMedico\": \"77005678\",\n    \"correoMedico\": \"maria.gonzalez@hospital.com\",\n    \"especialidades\": [\"Pediatría\"],\n    \"cantidadEspecialidades\": 1\n  }\n]\n```"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener un médico por ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "1"
+              ]
+            },
+            "description": "## Obtener un médico por ID\n\nRecupera la información detallada de un médico específico a partir de su identificador único (ID).\n\n---\n\n### Detalles del Endpoint\n\n| Campo | Valor |\n| --- | --- |\n| **Método** | `GET` |\n| **URL** | `{{base_url}}{{api_path}}/medicos/1` |\n\n---\n\n### Parámetros de Ruta\n\n| Parámetro | Tipo | Descripción |\n| --- | --- | --- |\n| `id` | `integer` | Identificador único del médico. En este ejemplo, el valor `1` al final de la URL representa el ID del médico que se desea consultar. |\n\n---\n\n### Encabezados de la Solicitud\n\n| Encabezado | Valor |\n| --- | --- |\n| `Content-Type` | `application/json` |\n\n---\n\n### Comportamiento Esperado\n\n- **Solicitud válida:** Cuando se proporciona un ID de médico existente, el servidor retorna un objeto JSON con los datos completos del médico correspondiente, junto con un código de estado `200 OK`.\n    \n- **ID no encontrado:** Si el ID proporcionado no corresponde a ningún médico registrado, el servidor retorna un error `404 Not Found`.\n    \n\n---\n\n### Ejemplo de URL\n\n```\nGET {{base_url}}{{api_path}}/medicos/1\n\n ```\n\n> Reemplaza `1` con el ID del médico que deseas consultar."
+          },
+          "response": []
+        },
+        {
+          "name": "Médico que NO existe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "999"
+              ]
+            },
+            "description": "Intenta obtener la información de un médico utilizando un ID que **no existe** en el sistema (ID: `999`).\n\nEste endpoint es útil para verificar el comportamiento de la API ante solicitudes de recursos inexistentes. Al enviar una petición GET con un ID inválido o no registrado, se espera que la API responda con un error apropiado en lugar de devolver datos incorrectos.\n\n**Comportamiento esperado:**\n- **Código de estado:** `404 Not Found`\n- **Descripción:** El servidor no encuentra ningún médico con el ID proporcionado y retorna un mensaje de error descriptivo.\n\n**Notas sobre manejo de errores:**\n- La API debe validar la existencia del recurso antes de intentar devolverlo.\n- La respuesta de error debe incluir un mensaje claro que indique que el médico solicitado no fue encontrado.\n- Este caso de prueba es importante para garantizar que la API no exponga datos sensibles ni genere excepciones no controladas ante IDs inexistentes."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener especialidades de un médico",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/1/especialidades",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "1",
+                "especialidades"
+              ]
+            },
+            "description": "## Obtener especialidades de un médico\n\nRecupera la lista de especialidades médicas asociadas a un médico específico, identificado por su ID en la URL.\n\n### Método HTTP\n`GET`\n\n### URL\n`{{base_url}}{{api_path}}/medicos/{id}/especialidades`\n\n### Variables de entorno\n| Variable | Descripción |\n|----------|-------------|\n| `{{base_url}}` | URL base del servidor (ej. `http://localhost:8080`) |\n| `{{api_path}}` | Prefijo de la ruta de la API (ej. `/api/v1`) |\n\n### Parámetros de ruta\n| Parámetro | Tipo | Descripción |\n|-----------|------|-------------|\n| `id` | `integer` | ID único del médico del cual se desean obtener las especialidades. En el ejemplo se usa `1`. |\n\n### Caso de uso\nEste endpoint es útil cuando se necesita conocer las especialidades que tiene registradas un médico en particular. Por ejemplo, al mostrar el perfil de un médico en la interfaz de usuario, se puede consultar este endpoint para listar sus áreas de especialización.\n\n### Respuesta esperada\nRetorna un arreglo con las especialidades asociadas al médico indicado. Si el médico no tiene especialidades registradas, se espera un arreglo vacío. Si el médico no existe, se retorna un error `404 Not Found`."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear un médico nuevo",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"Juan\",\n  \"apellidoMedico\": \"Pérez\",\n  \"telefonoMedico\": \"77009999\",\n  \"correoMedico\": \"juan.perez@hospital.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Crear un médico nuevo\n\nCrea un nuevo registro de médico en el sistema. Este endpoint permite registrar la información básica de un médico, incluyendo su nombre, apellido, teléfono y correo electrónico.\n\n---\n\n### Método y URL\n\n```\nPOST {{base_url}}{{api_path}}/medicos\n```\n\n---\n\n### Encabezados de la solicitud\n\n| Encabezado     | Valor              | Descripción                                      |\n|----------------|--------------------|--------------------------------------------------|\n| `Content-Type` | `application/json` | Indica que el cuerpo de la solicitud es JSON.    |\n\n---\n\n### Cuerpo de la solicitud\n\nEl cuerpo debe enviarse en formato **JSON** con los siguientes campos:\n\n| Campo            | Tipo     | Requerido | Descripción                                      |\n|------------------|----------|-----------|--------------------------------------------------|\n| `nombreMedico`   | `string` | ✅ Sí     | Nombre(s) del médico.                            |\n| `apellidoMedico` | `string` | ✅ Sí     | Apellido(s) del médico.                          |\n| `telefonoMedico` | `string` | ✅ Sí     | Número de teléfono de contacto del médico.       |\n| `correoMedico`   | `string` | ✅ Sí     | Dirección de correo electrónico del médico.      |\n\n**Ejemplo de cuerpo:**\n\n```json\n{\n  \"nombreMedico\": \"Juan\",\n  \"apellidoMedico\": \"Pérez\",\n  \"telefonoMedico\": \"77009999\",\n  \"correoMedico\": \"juan.perez@hospital.com\"\n}\n```\n\n---\n\n### Comportamiento esperado en caso de éxito\n\n- **Código de estado:** `201 Created`\n- El servidor retorna el objeto del médico recién creado, incluyendo el identificador único (`id`) asignado por el sistema.\n- El médico queda disponible para ser asociado a especialidades y citas médicas."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Nombre Vacío",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"\",\n  \"apellidoMedico\": \"Test\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"test@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Validación - Nombre Vacío\n\nEste caso de prueba verifica que la API retorne un error de validación cuando se intenta registrar un médico sin proporcionar el campo `nombreMedico` (nombre vacío).\n\n---\n\n### Endpoint\n\n**Método:** `POST`\n**URL:** `{{base_url}}{{api_path}}/medicos`\n\n---\n\n### Descripción de la prueba\n\nSe envía una solicitud para crear un nuevo médico con el campo `nombreMedico` vacío (`\"\"`). Se espera que la API **rechace la solicitud** y devuelva una respuesta de error de validación (por ejemplo, HTTP `400 Bad Request`), indicando que el nombre del médico es un campo obligatorio y no puede estar vacío.\n\n---\n\n### Cuerpo de la solicitud (Request Body)\n\n```json\n{\n  \"nombreMedico\": \"\",\n  \"apellidoMedico\": \"Test\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"test@test.com\"\n}\n```\n\n> ⚠️ El campo `nombreMedico` se envía intencionalmente vacío para activar la validación del servidor.\n\n---\n\n### Comportamiento esperado\n\n- **Código de estado:** `400 Bad Request` (o el código de error de validación definido por la API)\n- **Respuesta:** La API debe retornar un mensaje de error indicando que el nombre del médico no puede estar vacío o es requerido."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Teléfono Inválido",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"Test\",\n  \"apellidoMedico\": \"Usuario\",\n  \"telefonoMedico\": \"123\",\n  \"correoMedico\": \"test@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Validación - Teléfono Inválido\n\nEste request verifica que la API rechaza correctamente el registro de un médico cuando se proporciona un número de teléfono inválido (demasiado corto, con solo 3 dígitos).\n\n### Comportamiento esperado\n\nLa API debe retornar una respuesta de error indicando que el número de teléfono proporcionado no es válido. No se debe crear ningún registro en la base de datos.\n\n### Campos del cuerpo de la solicitud\n\n| Campo | Valor de prueba | Descripción |\n|---|---|---|\n| `nombreMedico` | `\"Test\"` | Nombre del médico a registrar. |\n| `apellidoMedico` | `\"Usuario\"` | Apellido del médico a registrar. |\n| `telefonoMedico` | `\"123\"` | Número de teléfono inválido (solo 3 dígitos). Este es el campo que desencadena el error de validación. |\n| `correoMedico` | `\"test@test.com\"` | Correo electrónico del médico. |\n\n### Propósito\n\nGarantizar que las validaciones del lado del servidor funcionen correctamente para el campo `telefonoMedico`, rechazando valores que no cumplan con el formato o longitud requerida."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Correo Inválido",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"Test\",\n  \"apellidoMedico\": \"Usuario\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"no-es-email\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Validación - Correo Inválido\n\nEste caso de prueba verifica que la API rechace correctamente el registro de un médico cuando el campo `correoMedico` contiene un formato de correo electrónico inválido.\n\n### Endpoint\n\n`POST {{base_url}}{{api_path}}/medicos`\n\n### Descripción\n\nSe envía una solicitud para crear un nuevo médico proporcionando un valor que no corresponde a un formato de correo electrónico válido (`\"no-es-email\"`). El objetivo es comprobar que el sistema aplica las validaciones de formato sobre el campo `correoMedico` y devuelve un error de validación apropiado en lugar de registrar el recurso.\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"nombreMedico\": \"Test\",\n  \"apellidoMedico\": \"Usuario\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"no-es-email\"\n}\n```\n\n### Comportamiento esperado\n\nLa API **no debe** crear el médico. En su lugar, debe retornar un error de validación (por ejemplo, `400 Bad Request`) indicando que el valor proporcionado en `correoMedico` no es un correo electrónico válido."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Correo Duplicado",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"Otro\",\n  \"apellidoMedico\": \"Médico\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"carlos.rodriguez@hospital.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos"
+              ]
+            },
+            "description": "## Validación - Correo Duplicado\n\n### Propósito\n\nEsta solicitud tiene como objetivo **validar que la API rechaza correctamente el registro de un médico cuando el correo electrónico proporcionado ya existe en el sistema**. Es una prueba de validación para garantizar que no se permitan correos duplicados en la base de datos.\n\n---\n\n### Comportamiento esperado\n\nAl enviar un correo que ya está registrado (`carlos.rodriguez@hospital.com`), la API **debe retornar un error** indicando que el correo electrónico ya se encuentra en uso. Se espera una respuesta con un código de estado de error (por ejemplo, `400 Bad Request` o `409 Conflict`), acompañada de un mensaje descriptivo que informe sobre el conflicto.\n\n---\n\n### Campos del cuerpo de la solicitud\n\n| Campo            | Tipo   | Descripción                                                                 |\n|------------------|--------|-----------------------------------------------------------------------------|\n| `nombreMedico`   | String | Nombre del médico a registrar.                                              |\n| `apellidoMedico` | String | Apellido del médico a registrar.                                            |\n| `telefonoMedico` | String | Número de teléfono del médico.                                              |\n| `correoMedico`   | String | Correo electrónico del médico. **En este caso, es un correo ya registrado.**|\n\n**Ejemplo del cuerpo enviado:**\n\n```json\n{\n  \"nombreMedico\": \"Otro\",\n  \"apellidoMedico\": \"Médico\",\n  \"telefonoMedico\": \"77001111\",\n  \"correoMedico\": \"carlos.rodriguez@hospital.com\"\n}\n```\n\n---\n\n### Notas sobre el escenario de validación\n\n- El correo `carlos.rodriguez@hospital.com` corresponde a un médico que **ya existe en el sistema**, por lo que cualquier intento de registrar otro médico con ese mismo correo debe ser rechazado.\n- Esta prueba verifica que la API aplica correctamente la restricción de **unicidad del correo electrónico**.\n- Asegúrese de que el médico con ese correo esté previamente registrado en el sistema antes de ejecutar esta solicitud, para que la validación sea efectiva.\n- El encabezado `Content-Type: application/json` debe estar presente en la solicitud."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar un médico",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreMedico\": \"Juan Carlos\",\n  \"apellidoMedico\": \"Pérez García\",\n  \"telefonoMedico\": \"77008888\",\n  \"correoMedico\": \"juancarlos.perez@hospital.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/13",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "13"
+              ]
+            },
+            "description": "## Actualizar un médico\n\nEste endpoint permite **actualizar la información de un médico existente** en el sistema, identificado por su ID.\n\n### Detalles del endpoint\n\n| Campo        | Valor                                      |\n|--------------|--------------------------------------------|\n| **Método**   | `PUT`                                      |\n| **URL**      | `{{base_url}}{{api_path}}/medicos/:id`     |\n\n### Encabezados requeridos\n\n| Encabezado     | Valor              |\n|----------------|--------------------|\n| `Content-Type` | `application/json` |\n\n### Parámetros de ruta\n\n- **`:id`** — Identificador único del médico que se desea actualizar.\n\n### Cuerpo de la solicitud (JSON)\n\n```json\n{\n  \"nombreMedico\": \"Juan Carlos\",\n  \"apellidoMedico\": \"Pérez García\",\n  \"telefonoMedico\": \"77008888\",\n  \"correoMedico\": \"juancarlos.perez@hospital.com\"\n}\n```\n\n| Campo             | Tipo     | Descripción                                      |\n|-------------------|----------|--------------------------------------------------|\n| `nombreMedico`    | `string` | Nombre(s) del médico.                            |\n| `apellidoMedico`  | `string` | Apellido(s) del médico.                          |\n| `telefonoMedico`  | `string` | Número de teléfono de contacto del médico.       |\n| `correoMedico`    | `string` | Dirección de correo electrónico del médico.      |\n\n### Respuesta esperada\n\nUna respuesta exitosa devuelve el registro del médico actualizado con los nuevos datos proporcionados."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualización parcial (solo teléfono)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefonoMedico\": \"77007777\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/13",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "13"
+              ]
+            },
+            "description": "## Actualización parcial de médico — Solo teléfono\n\nEste endpoint permite realizar una **actualización parcial** del registro de un médico, modificando únicamente el número de teléfono asociado a dicho médico.\n\n### Método HTTP\n`PUT`\n\n### URL\n```\n{{base_url}}{{api_path}}/medicos/13\n```\n\n- **`{{base_url}}`**: URL base del servidor (definida como variable de entorno).\n- **`{{api_path}}`**: Prefijo de la ruta de la API (definido como variable de entorno).\n- **`/medicos/13`**: Ruta del recurso. El valor `13` corresponde al **identificador único (ID)** del médico que se desea actualizar.\n\n### Cuerpo de la solicitud (Body)\n\n```json\n{\n  \"telefonoMedico\": \"77007777\"\n}\n```\n\n| Campo | Tipo | Descripción |\n|---|---|---|\n| `telefonoMedico` | `string` | Nuevo número de teléfono del médico. |\n\n### Notas\n- Esta solicitud realiza una **actualización parcial**: solo se modifica el campo `telefonoMedico`, sin afectar los demás datos del médico (nombre, especialidad, etc.).\n- El encabezado `Content-Type: application/json` debe estar presente en la solicitud.\n- Si el médico con el ID especificado no existe, el servidor puede retornar un error `404 Not Found`.\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Médico que no existe",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefonoMedico\": \"77007777\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "999"
+              ]
+            },
+            "description": "## Actualizar médico inexistente\n\nEste endpoint intenta actualizar la información de un médico que **no existe** en el sistema. Se utiliza como caso de prueba negativo para validar el manejo de errores de la API.\n\n**Método HTTP:** `PUT`\n\n**URL:** `{{base_url}}{{api_path}}/medicos/999`\n\n### Cuerpo de la solicitud (JSON)\n\n```json\n{\n  \"telefonoMedico\": \"77007777\"\n}\n```\n\n### Comportamiento esperado\n\nDado que no existe ningún médico con el ID `999` en el sistema, la API debería responder con un error indicando que el recurso no fue encontrado, por ejemplo:\n\n- **404 Not Found** — El médico con el ID especificado no existe en la base de datos.\n\n### Propósito\n\nEste caso de prueba verifica que la API maneja correctamente las solicitudes de actualización sobre recursos inexistentes, retornando una respuesta de error apropiada en lugar de crear un nuevo registro o fallar silenciosamente."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar médico SIN citas",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/13",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "13"
+              ]
+            },
+            "description": "## Eliminar médico sin citas programadas\n\nEste endpoint permite eliminar un médico del sistema, siempre y cuando no tenga citas médicas programadas asociadas. Si el médico tiene citas registradas, la operación será rechazada para preservar la integridad de los datos.\n\n---\n\n### Método y URL\n\n**Método:** `DELETE`  \n**URL:** `{{base_url}}{{api_path}}/medicos/:id`\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Requerido | Descripción                                      |\n|-----------|---------|-----------|--------------------------------------------------|\n| `id`      | Entero  | Sí        | Identificador único del médico a eliminar. Ejemplo: `13` |\n\n---\n\n### Notas importantes\n\n- El médico **no debe tener citas (citas médicas) asociadas** para que la eliminación sea exitosa. Si existen citas vinculadas al médico, el servidor devolverá un error indicando que la operación no puede completarse.\n- Una vez eliminado, el registro del médico no podrá recuperarse.\n- Asegúrese de verificar previamente que el médico no tenga citas activas o futuras antes de ejecutar esta solicitud."
+          },
+          "response": []
+        },
+        {
+          "name": "Intentar eliminar médico CON citas",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/medicos/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "medicos",
+                "1"
+              ]
+            },
+            "description": "## Intentar eliminar médico CON citas\n\nEste endpoint intenta eliminar un médico que tiene citas asociadas en el sistema. Su propósito es verificar que la API aplique correctamente la regla de negocio que **impide eliminar un médico cuando existen citas vinculadas a él**.\n\n---\n\n### Descripción\n\nRealiza una solicitud `DELETE` al recurso de médicos utilizando el ID del médico como parámetro de ruta. Cuando el médico tiene citas registradas, la API debe rechazar la operación y devolver un error apropiado.\n\n---\n\n### URL\n\n```\nDELETE {{base_url}}{{api_path}}/medicos/1\n```\n\n- **`{{base_url}}`** – URL base del servidor (definida en el entorno activo).\n- **`{{api_path}}`** – Prefijo de la ruta de la API (definido en el entorno activo).\n- **`1`** – ID del médico que se intenta eliminar. Puede reemplazarse por el ID de cualquier médico que tenga citas asociadas.\n\n---\n\n### Cabeceras (Headers)\n\n| Clave          | Valor              |\n|----------------|--------------------|\n| Content-Type   | application/json   |\n\n---\n\n### Cuerpo de la solicitud\n\nNo se requiere cuerpo en esta solicitud.\n\n---\n\n### Comportamiento esperado\n\nLa API **debe rechazar** la eliminación y retornar un código de error HTTP que indique que la operación no es permitida debido a las citas asociadas al médico. Los códigos de respuesta esperados son:\n\n- **`400 Bad Request`** – La solicitud es inválida porque el médico tiene dependencias activas.\n- **`409 Conflict`** – Existe un conflicto de integridad: el médico no puede eliminarse mientras tenga citas registradas.\n\nLa respuesta debe incluir un mensaje descriptivo que explique el motivo del rechazo.\n\n---\n\n### Notas\n\n- Este caso de prueba valida la **integridad referencial** y las **reglas de negocio** del sistema.\n- Asegúrese de que el médico con ID `1` tenga al menos una cita registrada antes de ejecutar esta solicitud para que el escenario sea válido.\n- Si el médico no tiene citas, la API podría proceder con la eliminación, lo cual no corresponde al escenario que este request busca probar."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pacientes",
+      "item": [
+        {
+          "name": "Listar todos los pacientes",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            },
+            "description": "## Listar todos los pacientes\n\nObtiene el listado completo de pacientes registrados en el sistema.\n\n**Método HTTP:** `GET`\n\n**URL:** `{{base_url}}{{api_path}}/pacientes`\n\n---\n\n### Variables de entorno utilizadas\n\n| Variable | Descripción |\n|---|---|\n| `{{base_url}}` | URL base del servidor (ej. `http://localhost:8080`) |\n| `{{api_path}}` | Ruta base de la API (ej. `/api/v1`) |\n\n---\n\n### Respuesta esperada\n\n- **200 OK** – Retorna un arreglo JSON con la lista de todos los pacientes registrados. Cada objeto del arreglo representa un paciente con sus datos correspondientes (nombre, identificación, fecha de nacimiento, etc.).\n- **204 No Content** – No hay pacientes registrados en el sistema.\n- **500 Internal Server Error** – Error interno del servidor al procesar la solicitud.\n\n---\n\n### Notas\n\n- Este endpoint no requiere parámetros de consulta ni cuerpo en la solicitud.\n- Se recomienda configurar correctamente las variables `base_url` y `api_path` en el entorno activo antes de ejecutar esta solicitud."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener un paciente por ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "1"
+              ]
+            },
+            "description": "## Obtener un paciente por ID\n\nRecupera la información detallada de un paciente específico a partir de su identificador único (ID) en el sistema de gestión de citas médicas.\n\n### Método y URL\n\n`GET {{base_url}}{{api_path}}/pacientes/{id}`\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Requerido | Descripción                              |\n|-----------|---------|-----------|------------------------------------------|\n| `id`      | entero  | Sí        | Identificador único del paciente a consultar |\n\n### Variables de entorno\n\n| Variable     | Descripción                                      |\n|--------------|--------------------------------------------------|\n| `base_url`   | URL base del servidor (ej. `http://localhost:8080`) |\n| `api_path`   | Prefijo de la ruta de la API (ej. `/api/v1`)     |\n\n### Respuestas\n\n| Código | Descripción                                                  |\n|--------|--------------------------------------------------------------|\n| `200 OK` | El paciente fue encontrado y se retorna su información completa |\n| `404 Not Found` | No existe un paciente con el ID proporcionado          |\n| `500 Internal Server Error` | Error interno del servidor                |\n\n### Ejemplo de respuesta exitosa (`200 OK`)\n\n```json\n{\n  \"id\": 1,\n  \"nombre\": \"Juan\",\n  \"apellido\": \"Pérez\",\n  \"fechaNacimiento\": \"1990-05-15\",\n  \"telefono\": \"7777-1234\",\n  \"correo\": \"juan.perez@example.com\"\n}\n```\n\n### Notas\n\n- Este endpoint no requiere cuerpo en la solicitud.\n- Asegúrese de que las variables de entorno `base_url` y `api_path` estén correctamente configuradas en el entorno activo antes de ejecutar la solicitud."
+          },
+          "response": []
+        },
+        {
+          "name": "Paciente que NO existe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "999"
+              ]
+            },
+            "description": "## Paciente que NO existe\n\nEste request intenta obtener un paciente que **no existe** en el sistema, utilizando un ID inválido (`999`).\n\n### Endpoint\n\n```\nGET {{base_url}}{{api_path}}/pacientes/999\n```\n\n### Descripción\n\nSe realiza una solicitud `GET` al endpoint de pacientes con el ID `999`, el cual no corresponde a ningún registro en la base de datos. El objetivo es verificar el comportamiento del sistema cuando se consulta un recurso inexistente.\n\n### Comportamiento esperado\n\nEl servidor debe responder con un error **404 Not Found**, indicando que el paciente con el ID proporcionado no fue encontrado en el sistema.\n\n### Utilidad\n\nEste request es útil para **probar el manejo de errores** en la API, específicamente cuando se intenta acceder a un paciente cuyo ID no existe. Permite validar que la API responde correctamente con el código de estado y mensaje de error apropiados ante recursos no encontrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar pacientes por nombre",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/buscar?termino=ana",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "buscar"
+              ],
+              "query": [
+                {
+                  "key": "termino",
+                  "value": "ana"
+                }
+              ]
+            },
+            "description": "## Buscar pacientes por nombre\n\nBusca pacientes registrados en el sistema filtrando por nombre o término de búsqueda.\n\n**Método HTTP:** `GET`\n\n**URL:** `{{base_url}}{{api_path}}/pacientes/buscar`\n\n### Parámetros de consulta (Query Parameters)\n\n| Parámetro | Tipo   | Requerido | Descripción                                              |\n|-----------|--------|-----------|----------------------------------------------------------|\n| `termino` | string | Sí        | Término de búsqueda utilizado para filtrar pacientes por nombre |\n\n### Comportamiento esperado\n\nRetorna una lista de pacientes cuyos nombres coincidan (total o parcialmente) con el término de búsqueda proporcionado en el parámetro `termino`.\n\n### Ejemplo de uso\n\n```\nGET {{base_url}}{{api_path}}/pacientes/buscar?termino=ana\n```\n\nRetorna todos los pacientes cuyo nombre contenga \"ana\"."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear un paciente nuevo",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Laura\",\n  \"apellidoPaciente\": \"Ramírez\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70009999\",\n  \"correoPaciente\": \"laura.ramirez@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            },
+            "description": "## Crear un paciente nuevo\n\nRegistra un nuevo paciente en el sistema de gestión de citas médicas. Este endpoint recibe los datos personales del paciente y los almacena en la base de datos para su posterior uso en la programación de citas.\n\n---\n\n### Método y URL\n\n| Campo   | Valor                              |\n|---------|------------------------------------|\n| Método  | `POST`                             |\n| URL     | `{{base_url}}{{api_path}}/pacientes` |\n\n---\n\n### Encabezados de la solicitud\n\n| Clave          | Valor              |\n|----------------|--------------------|\n| `Content-Type` | `application/json` |\n\n---\n\n### Cuerpo de la solicitud (JSON)\n\nEl cuerpo debe enviarse en formato JSON con los siguientes campos:\n\n| Campo               | Tipo     | Descripción                                      | Ejemplo                        |\n|---------------------|----------|--------------------------------------------------|--------------------------------|\n| `nombrePaciente`    | `string` | Nombre(s) del paciente                           | `\"Laura\"`                      |\n| `apellidoPaciente`  | `string` | Apellido(s) del paciente                         | `\"Ramírez\"`                    |\n| `fechaNacimiento`   | `string` | Fecha de nacimiento en formato `YYYY-MM-DD`      | `\"1995-08-12\"`                 |\n| `telefonoPaciente`  | `string` | Número de teléfono de contacto del paciente      | `\"70009999\"`                   |\n| `correoPaciente`    | `string` | Dirección de correo electrónico del paciente     | `\"laura.ramirez@email.com\"`    |\n\n**Ejemplo de cuerpo:**\n\n```json\n{\n  \"nombrePaciente\": \"Laura\",\n  \"apellidoPaciente\": \"Ramírez\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70009999\",\n  \"correoPaciente\": \"laura.ramirez@email.com\"\n}\n```\n\n---\n\n### Comportamiento esperado\n\n- Si la solicitud es válida, el sistema registra al nuevo paciente y retorna una respuesta de éxito con los datos del paciente creado.\n- Las variables `{{base_url}}` y `{{api_path}}` deben estar definidas en el entorno activo para que la URL se resuelva correctamente.\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Nombre Vacío",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"\",\n  \"apellidoPaciente\": \"Test\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            },
+            "description": "## Validación - Nombre Vacío\n\nEsta solicitud verifica que la API maneje correctamente el caso en que el campo `nombrePaciente` se envía vacío al momento de registrar un nuevo paciente. El objetivo es confirmar que el sistema retorna un error de validación apropiado en lugar de procesar el registro.\n\n---\n\n### Método y Endpoint\n\n| Método | URL |\n|--------|-----|\n| `POST` | `{{base_url}}{{api_path}}/pacientes` |\n\n---\n\n### Encabezados\n\n| Clave | Valor |\n|-------|-------|\n| `Content-Type` | `application/json` |\n\n---\n\n### Cuerpo de la Solicitud\n\n```json\n{\n  \"nombrePaciente\": \"\",\n  \"apellidoPaciente\": \"Test\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}\n```\n\n| Campo | Valor en este caso de prueba | Descripción |\n|-------|------------------------------|-------------|\n| `nombrePaciente` | `\"\"` *(vacío)* | Campo bajo prueba — se envía deliberadamente vacío para activar la validación |\n| `apellidoPaciente` | `\"Test\"` | Apellido del paciente |\n| `fechaNacimiento` | `\"1990-01-01\"` | Fecha de nacimiento en formato `YYYY-MM-DD` |\n| `telefonoPaciente` | `\"70001111\"` | Número de teléfono del paciente |\n| `correoPaciente` | `\"test@test.com\"` | Correo electrónico del paciente |\n\n---\n\n### Comportamiento Esperado\n\nDado que `nombrePaciente` es un campo requerido y se envía vacío, la API **debe rechazar la solicitud** y retornar una respuesta de error de validación (por ejemplo, `400 Bad Request`), indicando que el nombre del paciente no puede estar vacío. No se debe crear ningún registro en la base de datos."
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Fecha de nacimiento futura",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"2030-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            },
+            "description": "## Validación - Fecha de nacimiento futura\n\nEste request verifica que la API rechace correctamente el registro de un paciente cuando la **fecha de nacimiento proporcionada es una fecha futura**, garantizando así la integridad de los datos ingresados al sistema.\n\n---\n\n### Endpoint\n\n```\nPOST {{base_url}}{{api_path}}/pacientes\n```\n\n---\n\n### Descripción\n\nAl intentar crear un nuevo paciente con una fecha de nacimiento en el futuro (por ejemplo, `2030-01-01`), la API **debe retornar un error de validación** indicando que el valor ingresado no es válido. Una persona no puede haber nacido en una fecha que aún no ha ocurrido.\n\n---\n\n### Encabezados de la solicitud\n\n| Clave          | Valor              |\n|----------------|--------------------|\n| `Content-Type` | `application/json` |\n\n---\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"2030-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"test@test.com\"\n}\n```\n\n#### Descripción de los campos\n\n| Campo               | Tipo     | Descripción                                                                 |\n|---------------------|----------|-----------------------------------------------------------------------------|\n| `nombrePaciente`    | `string` | Nombre del paciente a registrar.                                            |\n| `apellidoPaciente`  | `string` | Apellido del paciente a registrar.                                          |\n| `fechaNacimiento`   | `string` | Fecha de nacimiento en formato `YYYY-MM-DD`. En este caso se usa una fecha futura inválida (`2030-01-01`) para provocar el error de validación. |\n| `telefonoPaciente`  | `string` | Número de teléfono del paciente.                                            |\n| `correoPaciente`    | `string` | Correo electrónico del paciente.                                            |\n\n---\n\n### Comportamiento esperado\n\nLa API **debe rechazar** la solicitud y retornar un error de validación, ya que la fecha de nacimiento `2030-01-01` corresponde a una fecha futura. Se espera una respuesta con código de estado `400 Bad Request` (o equivalente), acompañada de un mensaje que indique que la fecha de nacimiento no puede ser una fecha futura.\n\n---\n\n### Caso de prueba\n\n| Escenario                        | Valor de `fechaNacimiento` | Resultado esperado                        |\n|----------------------------------|----------------------------|-------------------------------------------|\n| Fecha de nacimiento futura       | `2030-01-01`               | Error de validación — fecha no permitida  |"
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Teléfono inválido",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"123\",\n  \"correoPaciente\": \"test@test.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Correo inválido",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoMedico\": \"no-es-email\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Correo duplicado",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Otro\",\n  \"apellidoPaciente\": \"Paciente\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"ana.martinez@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar un paciente",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Laura María\",\n  \"apellidoPaciente\": \"Ramírez García\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70008888\",\n  \"correoPaciente\": \"lauramaria.ramirez@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/16",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "16"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualización parcial (solo teléfono)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefonoPaciente\": \"70007777\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/16",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "16"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar fecha de nacimiento (recalcula edad)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fechaNacimiento\": \"2000-01-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/16",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "16"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar paciente que no existe",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombrePaciente\": \"Test\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/999",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar paciente SIN citas",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/16",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "16"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Intentar eliminar paciente CON citas",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/pacientes/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "pacientes",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Citas",
+      "item": [
+        {
+          "name": "Listar todas las citas",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener una cita por ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar citas por médico",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas?medico=1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ],
+              "query": [
+                {
+                  "key": "medico",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar citas por paciente",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas?paciente=1",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ],
+              "query": [
+                {
+                  "key": "paciente",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filtrar citas por estado",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas?estado=PENDIENTE",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ],
+              "query": [
+                {
+                  "key": "estado",
+                  "value": "PENDIENTE"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear una cita VÁLIDA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta general de seguimiento\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Médico sin esa especialidad ",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 5,\n  \"fechaCita\": \"2025-11-11\",\n  \"horaCita\": \"10:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Fin de semana (sábado)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-08\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Fin de semana (domingo)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-09\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Hora de almuerzo (12:00)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"12:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Horario inválido (17:00)",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"17:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Médico ocupado (duplicado) ",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 2,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-12\",\n  \"horaCita\": \"14:00:00\",\n  \"motivoCita\": \"Primera cita\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Fecha en el pasado",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2020-01-01\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validación - Campos obligatorios",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar estado PENDIENTE → CONFIRMADA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"CONFIRMADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21",
+                "estado"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar estado CONFIRMADA → COMPLETADA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"COMPLETADA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21",
+                "estado"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cambiar estado COMPLETADA → PENDIENTE",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"PENDIENTE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21",
+                "estado"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estado inválido",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nuevoEstado\": \"HELLOWORLD\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21/estado?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21",
+                "estado"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar fecha y hora de cita",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fechaCita\": \"2025-11-28\",\n  \"horaCita\": \"13:00:00\",\n  \"motivoCita\": \"Consulta actualizada\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/22?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "22"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Intentar actualizar cita COMPLETADA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivoCita\": \"Intento de actualización\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21?Content-Type=application/json",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21"
+              ],
+              "query": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar cita PENDIENTE",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/22",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "22"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Intentar eliminar cita COMPLETADA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}{{api_path}}/citas/21",
+              "host": [
+                "{{base_url}}{{api_path}}"
+              ],
+              "path": [
+                "citas",
+                "21"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "api_path",
+      "value": ""
+    }
+  ]
 }
