@@ -1,0 +1,72 @@
+services:
+
+  # SERVICIO 1: Base de datos PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: healify_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      # Persistencia, los datos sobreviven aunque el contenedor se reinicie
+      - postgres_data:/var/lib/postgresql/data
+      # Scripts de inicialización, se ejecutan solo la primera vez
+      - ./database/create_db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/create_db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - healify_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # SERVICIO 2: Backend Spring Boot
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: healify_backend
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      # Sobreescribimos ddl-auto a validate (ya la DB existe con el schema)
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    ports:
+      - "8080:8080"
+    networks:
+      - healify_network
+    depends_on:
+      db:
+        # Espera a que PostgreSQL esté listo antes de arrancar
+        condition: service_healthy
+
+  # SERVICIO 3: Frontend React + Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: healify_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - healify_network
+    depends_on:
+      - backend
+
+# Volumen para persistir datos de PostgreSQL
+volumes:
+  postgres_data:
+
+# Red interna compartida por los 3 servicios
+# Los contenedores se comunican por nombre (db, backend, frontend)
+networks:
+  healify_network:
+    driver: bridge
