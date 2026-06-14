@@ -3,6 +3,8 @@ import DashboardLayout from './components/layout/DashboardLayout';
 import DashboardPage from './pages/DashboardPage';
 import EspecialidadesPage from './pages/EspecialidadesPage';
 import MedicosPage from './pages/MedicosPage';
+import PacientesPage from './pages/PacientesPage';
+import CitasPage from './pages/CitasPage';
 import './styles/style.css';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/especialidades" element={<EspecialidadesPage />} />
           <Route path="/medicos" element={<MedicosPage />} />
+          <Route path="/pacientes" element={<PacientesPage />} />
+          <Route path="/citas" element={<CitasPage />} />
         </Routes>
       </DashboardLayout>
     </BrowserRouter>
