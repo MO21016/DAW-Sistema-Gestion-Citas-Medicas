@@ -1,0 +1,36 @@
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+const handleResponse = async (response) => {
+    if (!response.ok) {
+        const error = await response.json()
+            .catch(() => ({ message: 'Error desconocido' }));
+        throw new Error(error.message);
+    }
+    if (response.status === 204) return null;
+
+    // Handle plain text responses (e.g. POST returns a string, not JSON)
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        return response.json();
+    }
+    return response.text();
+};
+
+export const medicoEspecialidadService = {
+    asignar: async (data) => {
+        const response = await fetch(`${BASE_URL}/medicos-especialidades`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        return handleResponse(response);
+    },
+
+    desasignar: async (idMedico, idEspecialidad) => {
+        const response = await fetch(
+            `${BASE_URL}/medicos-especialidades?idMedico=${idMedico}&idEspecialidad=${idEspecialidad}`,
+            { method: 'DELETE' }
+        );
+        return handleResponse(response);
+    }
+};
