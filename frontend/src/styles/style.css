@@ -1049,4 +1049,205 @@ textarea {
   color: #b00020;
   border: 1px solid #ffb3b3;
   font-weight: 500;
+
+
+/* ==========================================================
+   CITAS MODULE - FILTROS POR ESTADO
+
+.filtros-estado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.filtro-pill {
+  padding: 0.45rem 1rem;
+
+  border-radius: 999px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  background: #f1f5f9;
+  color: var(--text-secondary);
+
+  border: 1px solid transparent;
+
+  transition: var(--transition);
+}
+
+.filtro-pill:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.filtro-pill.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: rgba(2, 132, 199, 0.2);
+}
+
+
+/* ==========================================================
+   CITAS MODULE - BOTÓN ESTADO EN TABLA
+
+.btn-estado {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+}
+
+.btn-estado:hover {
+  background: #7c3aed;
+  color: white;
+}
+
+
+/* ==========================================================
+   CITAS MODULE - MODAL DE CAMBIO DE ESTADO
+
+.estado-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.estado-actual {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.estado-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.estado-info {
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.estado-info p {
+  font-size: 0.95rem;
+}
+
+.estado-info-sub {
+  color: var(--text-secondary);
+  font-size: 0.85rem !important;
+  margin-top: 0.25rem;
+}
+
+.estado-instruccion {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.estado-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn-confirmar {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.btn-confirmar:hover {
+  background: #059669;
+  color: white;
+}
+
+.btn-completar {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+}
+
+.btn-completar:hover {
+  background: #0284c7;
+  color: white;
+}
+
+.btn-cancelar {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+.btn-cancelar:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.estado-bloqueado {
+  padding: 1.25rem;
+  background: #fef2f2;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.estado-bloqueado p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================
+   CITAS MODULE - FORM
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.cita-edit-info {
+  padding: 1rem 1.25rem;
+
+  background: #f0f9ff;
+  border: 1px solid rgba(2, 132, 199, 0.15);
+  border-radius: var(--radius-md);
+
+  margin-bottom: 0.5rem;
+}
+
+.cita-edit-info p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.cita-edit-info strong {
+  color: var(--text-primary);
+}
+
+.loading-selects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================================
+   RESPONSIVE - CITAS MODULE
+
+@media (min-width: 640px) {
+  .estado-acciones {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
 }
