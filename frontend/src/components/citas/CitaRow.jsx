@@ -35,31 +35,33 @@ const CitaRow = ({ cita, onEdit, onChangeEstado, onDelete }) => {
           {ESTADO_LABELS[cita.estadoCita] ?? cita.estadoCita}
         </span>
       </td>
-      <td className="actions-cell">
-        {puedeEditar && (
-          <button
-            className="btn btn-sm btn-edit"
-            onClick={() => onEdit(cita)}
-          >
-            Editar
-          </button>
-        )}
-        {puedeCambiarEstado && (
-          <button
-            className="btn btn-sm btn-estado"
-            onClick={() => onChangeEstado(cita)}
-          >
-            Estado
-          </button>
-        )}
-        {puedeEliminar && (
-          <button
-            className="btn btn-sm btn-danger"
-            onClick={() => onDelete(cita)}
-          >
-            Eliminar
-          </button>
-        )}
+      <td>
+        <div className="actions-wrapper">
+          {puedeEditar && (
+            <button
+              className="btn btn-sm btn-edit"
+              onClick={() => onEdit(cita)}
+            >
+              Editar
+            </button>
+          )}
+          {puedeCambiarEstado && (
+            <button
+              className="btn btn-sm btn-estado"
+              onClick={() => onChangeEstado(cita)}
+            >
+              Estado
+            </button>
+          )}
+          {puedeEliminar && (
+            <button
+              className="btn btn-sm btn-danger"
+              onClick={() => onDelete(cita)}
+            >
+              Eliminar
+            </button>
+          )}
+        </div>
       </td>
     </tr>
   );

@@ -71,8 +71,25 @@ const CitaForm = ({
   }, [editingCita]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'idMedico') {
+      // Al cambiar médico, resetear especialidad porque puede no ser válida
+      setFormData({ ...formData, idMedico: value, idEspecialidad: '' });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
+
+  // Filtrar especialidades según el médico seleccionado
+  const medicoSeleccionado = medicos.find(
+    (m) => String(m.idMedico) === String(formData.idMedico)
+  );
+
+  const especialidadesFiltradas = medicoSeleccionado
+    ? especialidades.filter((e) =>
+        medicoSeleccionado.especialidades?.includes(e.nombreEspecialidad)
+      )
+    : [];
 
   const resetForm = () => {
     setFormData(initialState);
@@ -174,7 +191,7 @@ const CitaForm = ({
         </div>
       )}
 
-      {/* Especialidad - solo al crear */}
+      {/* Especialidad - solo al crear, filtrada por médico */}
       {!isEditing && (
         <div className="form-group">
           <label>Especialidad</label>
@@ -183,9 +200,16 @@ const CitaForm = ({
             value={formData.idEspecialidad}
             onChange={handleChange}
             required
+            disabled={!formData.idMedico}
           >
-            <option value="">Seleccionar especialidad...</option>
-            {especialidades.map((e) => (
+            <option value="">
+              {!formData.idMedico
+                ? 'Primero selecciona un médico...'
+                : especialidadesFiltradas.length === 0
+                  ? 'Este médico no tiene especialidades asignadas'
+                  : 'Seleccionar especialidad...'}
+            </option>
+            {especialidadesFiltradas.map((e) => (
               <option key={e.idEspecialidad} value={e.idEspecialidad}>
                 {e.nombreEspecialidad}
               </option>

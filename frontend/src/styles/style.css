@@ -360,9 +360,11 @@ td {
   font-size: 0.95rem;
 }
 
-.actions-cell {
+.actions-wrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 /* ==========================================================
@@ -1041,6 +1043,7 @@ textarea {
   position: relative;
   min-height: 100vh;
 }
+
 .error-message {
   margin: 15px;
   padding: 12px;
@@ -1049,10 +1052,11 @@ textarea {
   color: #b00020;
   border: 1px solid #ffb3b3;
   font-weight: 500;
-
+}
 
 /* ==========================================================
    CITAS MODULE - FILTROS POR ESTADO
+========================================================== */
 
 .filtros-estado {
   display: flex;
@@ -1088,9 +1092,9 @@ textarea {
   border-color: rgba(2, 132, 199, 0.2);
 }
 
-
 /* ==========================================================
    CITAS MODULE - BOTÓN ESTADO EN TABLA
+========================================================== */
 
 .btn-estado {
   background: rgba(139, 92, 246, 0.12);
@@ -1102,9 +1106,9 @@ textarea {
   color: white;
 }
 
-
 /* ==========================================================
    CITAS MODULE - MODAL DE CAMBIO DE ESTADO
+========================================================== */
 
 .estado-modal-content {
   display: flex;
@@ -1196,9 +1200,9 @@ textarea {
   font-size: 0.9rem;
 }
 
-
 /* ==========================================================
    CITAS MODULE - FORM
+========================================================== */
 
 .form-row {
   display: grid;
@@ -1236,9 +1240,9 @@ textarea {
   color: var(--text-secondary);
 }
 
-
 /* ==========================================================
    RESPONSIVE - CITAS MODULE
+========================================================== */
 
 @media (min-width: 640px) {
   .estado-acciones {
