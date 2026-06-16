@@ -1090,7 +1090,8 @@
               "path": [
                 "pacientes"
               ]
-            }
+            },
+            "description": "## Validación - Teléfono inválido\n\nEste request verifica que la API rechaza correctamente el registro de un paciente cuando se proporciona un número de teléfono con un formato inválido.\n\n### Propósito\n\nComprobar que el endpoint de registro de pacientes aplica validaciones sobre el campo `telefonoPaciente`. Cuando se envía un valor que no cumple con el formato esperado (por ejemplo, un número demasiado corto como `\"123\"`), la API debe retornar un error de validación en lugar de registrar al paciente.\n\n### Comportamiento esperado\n\nLa API debe responder con un código de estado **400 Bad Request** (o similar) e incluir un mensaje de error que indique que el número de teléfono proporcionado no es válido.\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"123\",\n  \"correoPaciente\": \"test@test.com\"\n}\n```\n\n| Campo               | Valor            | Observación                                      |\n|---------------------|------------------|--------------------------------------------------|\n| `nombrePaciente`    | `Test`           | Valor de prueba                                  |\n| `apellidoPaciente`  | `Usuario`        | Valor de prueba                                  |\n| `fechaNacimiento`   | `1990-01-01`     | Fecha válida en formato ISO 8601                 |\n| `telefonoPaciente`  | `123`            | ⚠️ **Valor intencionalmente inválido** (muy corto) |\n| `correoPaciente`    | `test@test.com`  | Correo electrónico válido                        |\n\n### Resultado exitoso de la prueba\n\nLa prueba se considera exitosa si la API responde con un error de validación (por ejemplo, `400 Bad Request`) indicando que el campo `telefonoPaciente` no cumple con el formato requerido. No se debe crear ningún registro de paciente en la base de datos."
           },
           "response": []
         },
@@ -1120,7 +1121,8 @@
               "path": [
                 "pacientes"
               ]
-            }
+            },
+            "description": "## Validación - Correo inválido\n\nEste caso de prueba verifica que el endpoint `POST /pacientes` rechaza correctamente el registro de un paciente cuando el campo `correoMedico` contiene un formato de correo electrónico inválido.\n\n---\n\n### Propósito\n\nComprobar que la API aplica validación de formato sobre el campo `correoMedico` y devuelve una respuesta de error apropiada cuando el valor proporcionado no corresponde a una dirección de correo electrónico válida.\n\n---\n\n### Endpoint\n\n| Método | URL |\n|--------|-----|\n| `POST` | `{{base_url}}{{api_path}}/pacientes` |\n\n---\n\n### Cuerpo de la solicitud (Body)\n\n```json\n{\n  \"nombrePaciente\": \"Test\",\n  \"apellidoPaciente\": \"Usuario\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoMedico\": \"no-es-email\"\n}\n```\n\n| Campo | Valor | Descripción |\n|-------|-------|-------------|\n| `nombrePaciente` | `\"Test\"` | Nombre del paciente |\n| `apellidoPaciente` | `\"Usuario\"` | Apellido del paciente |\n| `fechaNacimiento` | `\"1990-01-01\"` | Fecha de nacimiento en formato `YYYY-MM-DD` |\n| `telefonoPaciente` | `\"70001111\"` | Número de teléfono del paciente |\n| `correoMedico` | `\"no-es-email\"` | ⚠️ Valor intencionalmente inválido para provocar el error de validación |\n\n---\n\n### Comportamiento esperado\n\nLa API debe rechazar la solicitud y retornar una respuesta de error indicando que el formato del correo electrónico es inválido.\n\n| Propiedad | Valor esperado |\n|-----------|----------------|\n| **Código de estado HTTP** | `400 Bad Request` |\n| **Mensaje de error** | Indicación de que el campo `correoMedico` no tiene un formato de correo válido |"
           },
           "response": []
         },
@@ -1150,7 +1152,8 @@
               "path": [
                 "pacientes"
               ]
-            }
+            },
+            "description": "## Validación - Correo duplicado\n\nThis request validates that the API correctly rejects a patient registration attempt when the provided email address already exists in the system. It ensures that duplicate email validation is enforced at the API level.\n\n---\n\n### Endpoint\n\n**POST** `{{base_url}}{{api_path}}/pacientes`\n\n---\n\n### Request Headers\n\n| Header | Value |\n|---|---|\n| Content-Type | application/json |\n\n---\n\n### Request Body\n\n```json\n{\n  \"nombrePaciente\": \"Otro\",\n  \"apellidoPaciente\": \"Paciente\",\n  \"fechaNacimiento\": \"1990-01-01\",\n  \"telefonoPaciente\": \"70001111\",\n  \"correoPaciente\": \"ana.martinez@email.com\"\n}\n```\n\n| Field | Type | Description |\n|---|---|---|\n| `nombrePaciente` | string | Patient's first name |\n| `apellidoPaciente` | string | Patient's last name |\n| `fechaNacimiento` | string (date) | Patient's date of birth in `YYYY-MM-DD` format |\n| `telefonoPaciente` | string | Patient's phone number |\n| `correoPaciente` | string | Patient's email address — in this test case, an email that **already exists** in the system |\n\n---\n\n### Expected Behavior\n\nThe API should return an **error response** indicating that the email address is already registered. This confirms that the duplicate email validation is working correctly and prevents multiple patient records from sharing the same email."
           },
           "response": []
         },
@@ -1181,7 +1184,8 @@
                 "pacientes",
                 "16"
               ]
-            }
+            },
+            "description": "## Actualizar un paciente\n\nActualiza la información de un paciente existente en el sistema mediante su ID.\n\n### URL\n`PUT {{base_url}}{{api_path}}/pacientes/:id`\n\n### Headers\n| Key | Value | Descripción |\n|-----|-------|-------------|\n| Content-Type | application/json | Indica que el cuerpo de la solicitud está en formato JSON |\n\n### Body (JSON)\n| Campo | Tipo | Descripción |\n|-------|------|-------------|\n| `nombrePaciente` | string | Nombre(s) del paciente |\n| `apellidoPaciente` | string | Apellido(s) del paciente |\n| `fechaNacimiento` | string (YYYY-MM-DD) | Fecha de nacimiento del paciente |\n| `telefonoPaciente` | string | Número de teléfono del paciente |\n| `correoPaciente` | string | Correo electrónico del paciente |\n\n### Ejemplo de cuerpo de solicitud\n```json\n{\n  \"nombrePaciente\": \"Laura María\",\n  \"apellidoPaciente\": \"Ramírez García\",\n  \"fechaNacimiento\": \"1995-08-12\",\n  \"telefonoPaciente\": \"70008888\",\n  \"correoPaciente\": \"lauramaria.ramirez@email.com\"\n}\n```\n\n### Notas\n- El ID del paciente se especifica como parámetro en la URL (e.g., `/pacientes/16`).\n- Todos los campos del cuerpo son requeridos para realizar la actualización completa del registro."
           },
           "response": []
         },
@@ -1212,7 +1216,8 @@
                 "pacientes",
                 "16"
               ]
-            }
+            },
+            "description": "## Actualización Parcial de Paciente (Solo Teléfono)\n\nEste endpoint permite realizar una **actualización parcial** del registro de un paciente, modificando únicamente el campo del número de teléfono (`telefonoPaciente`). Aunque utiliza el método HTTP **PUT**, su comportamiento es similar al de **PATCH**, ya que solo se actualiza el campo especificado en el cuerpo de la solicitud, sin afectar los demás datos del paciente.\n\n---\n\n### Detalles del Endpoint\n\n| Campo       | Valor                                      |\n|-------------|--------------------------------------------|\n| **Método**  | `PUT`                                      |\n| **URL**     | `{{base_url}}{{api_path}}/pacientes/16`    |\n\n---\n\n### Encabezados (Headers)\n\n| Clave          | Valor              |\n|----------------|--------------------|\n| `Content-Type` | `application/json` |\n\n---\n\n### Cuerpo de la Solicitud (Request Body)\n\nEl cuerpo debe enviarse en formato **JSON** e incluir únicamente el campo a actualizar:\n\n```json\n{\n  \"telefonoPaciente\": \"70007777\"\n}\n```\n\n| Campo               | Tipo     | Descripción                              |\n|---------------------|----------|------------------------------------------|\n| `telefonoPaciente`  | `string` | Nuevo número de teléfono del paciente.   |\n\n---\n\n### Notas\n\n- Este endpoint aplica una **actualización parcial** sobre el paciente con ID `16`. Solo se modifica el campo `telefonoPaciente`; el resto de los datos del paciente permanecen sin cambios.\n- Aunque se utiliza el método `PUT`, el comportamiento es equivalente al de `PATCH`, actualizando únicamente los campos enviados en el cuerpo de la solicitud.\n- Asegúrese de que las variables de entorno `base_url` y `api_path` estén correctamente configuradas en el entorno activo antes de ejecutar la solicitud."
           },
           "response": []
         },
@@ -1243,7 +1248,8 @@
                 "pacientes",
                 "16"
               ]
-            }
+            },
+            "description": "## Cambiar fecha de nacimiento (recalcula edad)\n\nActualiza únicamente el campo `fechaNacimiento` de un paciente existente. Al modificar este valor, el sistema recalcula automáticamente la edad del paciente en función de la nueva fecha proporcionada.\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Descripción                          |\n|-----------|---------|--------------------------------------|\n| `id`      | Integer | ID único del paciente a actualizar. En este ejemplo: `16`. |\n\n---\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"fechaNacimiento\": \"2000-01-01\"\n}\n```\n\n| Campo             | Tipo   | Requerido | Descripción                                                                 |\n|-------------------|--------|-----------|-----------------------------------------------------------------------------|\n| `fechaNacimiento` | String | Sí        | Nueva fecha de nacimiento en formato `YYYY-MM-DD`. Debe ser una fecha pasada (no futura). |\n\n---\n\n### Respuestas esperadas\n\n| Código | Descripción                                                                 |\n|--------|-----------------------------------------------------------------------------|\n| `200 OK` | El paciente fue actualizado correctamente. La respuesta incluye los datos del paciente con la edad recalculada. |\n| `400 Bad Request` | La fecha proporcionada es inválida o está en el futuro.                    |\n| `404 Not Found`   | No existe un paciente con el ID especificado.                              |\n\n---\n\n### Notas\n\n- Este endpoint realiza una **actualización parcial**: solo es necesario enviar el campo `fechaNacimiento`; los demás datos del paciente no se modifican.\n- La edad del paciente se recalcula automáticamente en el servidor a partir de la nueva fecha de nacimiento y la fecha actual.\n- Las variables `{{base_url}}` y `{{api_path}}` deben estar definidas en el entorno activo (por ejemplo, `Local Development`)."
           },
           "response": []
         },
@@ -1274,7 +1280,8 @@
                 "pacientes",
                 "999"
               ]
-            }
+            },
+            "description": "## Actualizar paciente que no existe\n\nEste request intenta actualizar un paciente con un ID que **no existe** en el sistema (ID: `999`), con el objetivo de validar el manejo de errores de la API ante registros inexistentes.\n\n### Detalles del Request\n\n| Campo       | Valor                                      |\n|-------------|--------------------------------------------|\n| **Método**  | `PUT`                                      |\n| **Endpoint**| `{{base_url}}{{api_path}}/pacientes/999`   |\n\n### Cuerpo de la Solicitud (JSON)\n\n```json\n{\n  \"nombrePaciente\": \"Test\"\n}\n```\n\n### Comportamiento Esperado\n\nDado que no existe ningún paciente con el ID `999`, la API debería retornar una respuesta de error, por ejemplo:\n\n- **404 Not Found** — El paciente solicitado no fue encontrado en el sistema.\n\n### Propósito\n\nVerificar que la API maneja correctamente los casos en que se intenta actualizar un recurso que no existe, retornando un código de error apropiado en lugar de crear un nuevo registro o fallar silenciosamente."
           },
           "response": []
         },
@@ -1306,7 +1313,8 @@
                 "pacientes",
                 "16"
               ]
-            }
+            },
+            "description": "## Eliminar paciente sin citas programadas\n\nElimina un paciente existente del sistema, identificado por su ID en la URL. La operación solo se lleva a cabo si el paciente **no tiene citas médicas asociadas** (en ningún estado: pendiente, confirmada, completada, etc.).\n\n---\n\n### Detalles del Endpoint\n\n| Campo  | Valor                                        |\n|--------|----------------------------------------------|\n| Método | `DELETE`                                     |\n| URL    | `{{base_url}}{{api_path}}/pacientes/16`      |\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Descripción                                                  |\n|-----------|---------|--------------------------------------------------------------|\n| `id`      | Integer | ID único del paciente a eliminar. En este ejemplo: `16`.     |\n\n---\n\n### Condición de Eliminación\n\nEl paciente **no debe tener citas médicas registradas** en el sistema para que la eliminación sea permitida. Si existen citas vinculadas al paciente, el servidor rechazará la solicitud con un error apropiado (por ejemplo, `409 Conflict` o `400 Bad Request`).\n\n---\n\n### Respuestas esperadas\n\n| Código              | Descripción                                                                                   |\n|---------------------|-----------------------------------------------------------------------------------------------|\n| `200 OK`            | El paciente fue eliminado correctamente del sistema.                                          |\n| `204 No Content`    | El paciente fue eliminado correctamente (sin cuerpo en la respuesta).                         |\n| `400 Bad Request`   | La solicitud es inválida o el paciente tiene citas asociadas que impiden su eliminación.      |\n| `404 Not Found`     | No existe un paciente con el ID especificado.                                                 |\n| `409 Conflict`      | El paciente tiene citas médicas asociadas y no puede ser eliminado.                           |\n\n---\n\n### Notas Importantes\n\n- Esta operación es **irreversible**; una vez eliminado el paciente, no puede recuperarse.\n- Para eliminar un paciente que sí tiene citas asociadas, primero se deben cancelar o eliminar dichas citas.\n- Las variables `{{base_url}}` y `{{api_path}}` deben estar definidas en el entorno activo (por ejemplo, `Local Development`)."
           },
           "response": []
         },
@@ -1338,7 +1346,8 @@
                 "pacientes",
                 "1"
               ]
-            }
+            },
+            "description": "## Intentar eliminar paciente CON citas\n\nEste endpoint intenta **eliminar un paciente que tiene citas médicas asociadas** en el sistema. Se utiliza como caso de prueba negativo para validar que la API protege la integridad referencial, impidiendo la eliminación de pacientes con registros de citas vinculados.\n\n---\n\n### Método y URL\n\n```\nDELETE {{base_url}}{{api_path}}/pacientes/1\n```\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Requerido | Descripción                                      |\n|-----------|---------|-----------|--------------------------------------------------|\n| `id`      | Integer | Sí        | ID único del paciente a eliminar. En este ejemplo: `1`. |\n\n---\n\n### Encabezados de la solicitud\n\n| Clave          | Valor              | Descripción                                   |\n|----------------|--------------------|-----------------------------------------------|\n| `Content-Type` | `application/json` | Indica que la solicitud usa formato JSON.     |\n\n---\n\n### Comportamiento esperado\n\nDado que el paciente con ID `1` tiene citas médicas registradas en el sistema, la API **debe rechazar la eliminación** y retornar una respuesta de error que indique el conflicto, por ejemplo:\n\n- **`409 Conflict`** — No es posible eliminar el paciente porque tiene citas médicas asociadas.\n- **`400 Bad Request`** — La solicitud no puede procesarse debido a dependencias existentes.\n\n---\n\n### Propósito\n\nVerificar que la API implementa correctamente las restricciones de integridad referencial, evitando la eliminación en cascada no controlada de pacientes que aún tienen citas activas o históricas en el sistema.\n\n---\n\n### Notas\n\n- Este es un **caso de prueba negativo**: se espera que la operación falle con un error apropiado.\n- Para eliminar un paciente exitosamente, primero deben cancelarse o eliminarse todas sus citas asociadas.\n- Las variables `{{base_url}}` y `{{api_path}}` deben estar definidas en el entorno activo (por ejemplo, `Local Development`)."
           },
           "response": []
         }
@@ -1375,7 +1384,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "Retorna el listado completo de todas las citas médicas registradas en el sistema.\n\n## Descripción\n\nEste endpoint devuelve todas las citas médicas almacenadas, sin aplicar ningún filtro. Cada cita incluye información sobre el paciente, el médico, la especialidad, la fecha y hora programada, y el estado actual de la cita.\n\n## Variables de entorno\n\n| Variable | Descripción |\n|---|---|\n| `base_url` | URL base del servidor (ej. `http://localhost:8080`) |\n| `api_path` | Prefijo de la ruta de la API (ej. `/api`) |\n\n## Respuesta exitosa\n\n**Código:** `200 OK`\n\nDevuelve un arreglo JSON con los objetos de cita. Cada objeto contiene:\n\n| Campo | Tipo | Descripción |\n|---|---|---|\n| `id` | `integer` | Identificador único de la cita |\n| `paciente` | `object` | Datos del paciente asociado |\n| `medico` | `object` | Datos del médico asignado |\n| `especialidad` | `object` | Especialidad médica de la cita |\n| `fechaHora` | `string (ISO 8601)` | Fecha y hora programada de la cita |\n| `estado` | `string` | Estado de la cita: `PENDIENTE`, `CONFIRMADA` o `COMPLETADA` |\n\n## Notas\n\n- Si no existen citas registradas, se devuelve un arreglo vacío `[]`.\n- Para filtrar citas por médico, paciente o estado, utiliza los endpoints de filtrado disponibles en esta misma carpeta."
           },
           "response": []
         },
@@ -1403,7 +1413,8 @@
                 "citas",
                 "1"
               ]
-            }
+            },
+            "description": "Retrieves the details of a specific medical appointment by its unique ID.\n\n## Endpoint\n\n`GET {{base_url}}{{api_path}}/citas/{id}`\n\n## Path Parameters\n\n| Parameter | Type    | Required | Description                          |\n|-----------|---------|----------|--------------------------------------|\n| `id`      | integer | Yes      | The unique identifier of the appointment |\n\n## Request\n\nNo request body or query parameters are required.\n\n## Response\n\nReturns a JSON object with the full details of the appointment, including:\n\n- `id` — Unique identifier of the appointment\n- `fecha` — Date of the appointment\n- `hora` — Time of the appointment\n- `estado` — Current status (`PENDIENTE`, `CONFIRMADA`, or `COMPLETADA`)\n- `medico` — Assigned doctor information\n- `paciente` — Patient information\n- `especialidad` — Medical specialty associated with the appointment\n\n## Status Codes\n\n| Code | Description                                      |\n|------|--------------------------------------------------|\n| 200  | Appointment found and returned successfully      |\n| 404  | No appointment found with the given ID           |\n\n## Notes\n\n- The example URL uses `id = 1`. Replace it with the actual appointment ID you want to retrieve.\n- To list all appointments, use the **Listar todas las citas** request.\n- To filter appointments by doctor, patient, or status, use the corresponding filter requests in this folder."
           },
           "response": []
         },
@@ -1436,7 +1447,8 @@
                   "value": "1"
                 }
               ]
-            }
+            },
+            "description": "Retorna la lista de citas médicas filtradas por el médico especificado.\n\n## Parámetros de consulta (Query Parameters)\n\n| Parámetro | Tipo    | Requerido | Descripción                                      |\n|-----------|---------|-----------|--------------------------------------------------|\n| `medico`  | integer | Sí        | ID del médico por el cual se desea filtrar las citas. |\n\n## Ejemplo de solicitud\n\n```\nGET {{base_url}}{{api_path}}/citas?medico=1\n```\n\n## Respuesta exitosa\n\n- **Código:** `200 OK`\n- **Contenido:** Arreglo JSON con las citas asociadas al médico indicado.\n\n## Notas\n\n- Si el médico no existe o no tiene citas registradas, se puede retornar un arreglo vacío `[]`.\n- El valor del parámetro `medico` debe corresponder a un ID válido registrado en el sistema."
           },
           "response": []
         },
@@ -1469,7 +1481,8 @@
                   "value": "1"
                 }
               ]
-            }
+            },
+            "description": "## Filtrar citas por paciente\n\nRetrieves a list of medical appointments (**citas**) filtered by a specific patient (**paciente**). This endpoint allows you to query all appointments associated with a given patient ID.\n\n---\n\n### HTTP Method & URL\n\n```\nGET {{base_url}}{{api_path}}/citas?paciente=1\n```\n\n---\n\n### Query Parameters\n\n| Parameter  | Type    | Required | Description                                                  |\n|------------|---------|----------|--------------------------------------------------------------|\n| `paciente` | integer | Yes      | The unique identifier of the patient whose appointments you want to retrieve. |\n\n---\n\n### Request Body\n\nNone — this is a read-only `GET` request and does not require a request body.\n\n---\n\n### Expected Behavior / Response\n\n- **200 OK** — Returns a list of medical appointments belonging to the specified patient. The response body will contain an array of appointment objects filtered by the provided `paciente` ID.\n- **400 Bad Request** — Returned if the `paciente` query parameter is missing or invalid.\n- **404 Not Found** — Returned if no appointments are found for the given patient ID.\n"
           },
           "response": []
         },
@@ -1502,7 +1515,8 @@
                   "value": "PENDIENTE"
                 }
               ]
-            }
+            },
+            "description": "## Filtrar Citas por Estado\n\nObtiene una lista de citas médicas filtradas según su estado actual. Este endpoint permite consultar únicamente las citas que se encuentren en un estado específico, facilitando la gestión y seguimiento de las citas en el sistema.\n\n---\n\n### Parámetros de consulta (Query Parameters)\n\n| Parámetro | Tipo   | Requerido | Descripción |\n|-----------|--------|-----------|-------------|\n| `estado`  | string | ✅ Sí     | Estado de las citas a filtrar. Determina qué citas se incluirán en la respuesta. |\n\n#### Valores posibles para `estado`\n\n| Valor        | Descripción                                      |\n|--------------|--------------------------------------------------|\n| `PENDIENTE`  | Citas que han sido agendadas pero aún no confirmadas ni atendidas. |\n| `CONFIRMADA` | Citas confirmadas por el médico o el sistema.    |\n| `CANCELADA`  | Citas que fueron canceladas por el paciente o el médico. |\n| `COMPLETADA` | Citas que ya fueron atendidas satisfactoriamente. |\n\n---\n\n### Variables de entorno utilizadas\n\n| Variable    | Descripción |\n|-------------|-------------|\n| `base_url`  | URL base del servidor (ej. `http://localhost:8080`). Se configura en el entorno activo. |\n| `api_path`  | Prefijo de la ruta de la API (ej. `/api/v1`). Se configura en el entorno activo. |\n\n---\n\n### Ejemplo de uso\n\n```\nGET {{base_url}}{{api_path}}/citas?estado=PENDIENTE\n```\n\nEsta solicitud retorna todas las citas médicas cuyo estado sea `PENDIENTE`. Para consultar citas en otro estado, simplemente cambia el valor del parámetro `estado` por cualquiera de los valores listados anteriormente (ej. `CONFIRMADA`, `CANCELADA`, `COMPLETADA`)."
           },
           "response": []
         },
@@ -1537,7 +1551,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Crear una cita médica válida\n\nCrea una nueva cita médica en el sistema. Este endpoint registra una cita asociando un paciente, un médico y una especialidad, junto con la fecha, hora y motivo de la consulta.\n\n---\n\n### Método y URL\n\n```\nPOST {{base_url}}{{api_path}}/citas\n```\n\n---\n\n### Encabezados de la solicitud\n\n| Encabezado     | Valor              | Descripción                                      |\n|----------------|--------------------|--------------------------------------------------|\n| `Content-Type` | `application/json` | Indica que el cuerpo de la solicitud es JSON.    |\n\n---\n\n### Cuerpo de la solicitud (JSON)\n\n| Campo            | Tipo     | Requerido | Descripción                                                                 |\n|------------------|----------|-----------|-----------------------------------------------------------------------------|\n| `idPaciente`     | `integer` | ✅ Sí     | Identificador único del paciente. Debe corresponder a un paciente existente. |\n| `idMedico`       | `integer` | ✅ Sí     | Identificador único del médico. Debe corresponder a un médico existente.     |\n| `idEspecialidad` | `integer` | ✅ Sí     | Identificador de la especialidad médica asociada a la cita.                  |\n| `fechaCita`      | `string`  | ✅ Sí     | Fecha de la cita en formato `YYYY-MM-DD`. Debe ser una fecha futura válida.  |\n| `horaCita`       | `string`  | ✅ Sí     | Hora de la cita en formato `HH:MM:SS` (24 horas).                           |\n| `motivoCita`     | `string`  | ✅ Sí     | Descripción breve del motivo de la consulta médica.                          |\n\n---\n\n### Ejemplo de cuerpo de solicitud\n\n```json\n{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta general de seguimiento\"\n}\n```\n\n---\n\n### Notas y restricciones\n\n- Los valores de `idPaciente`, `idMedico` e `idEspecialidad` deben existir previamente en el sistema.\n- La `fechaCita` debe estar en formato ISO 8601 (`YYYY-MM-DD`) y representar una fecha válida.\n- La `horaCita` debe estar en formato de 24 horas (`HH:MM:SS`).\n- El campo `motivoCita` no debe estar vacío y debe describir brevemente el propósito de la consulta.\n- Se recomienda verificar que no exista un conflicto de horario para el médico antes de crear la cita."
           },
           "response": []
         },
@@ -1567,7 +1582,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "Verifica que el sistema rechace la creación de una cita cuando el médico especificado **no tiene asignada la especialidad** requerida para atender al paciente.\n\n## Escenario\n\nSe intenta crear una cita asignando al médico con `idMedico: 1` para atender la especialidad con `idEspecialidad: 5`, pero dicho médico no tiene esa especialidad registrada en el sistema.\n\n## Request Body\n\n| Campo | Valor | Descripción |\n|---|---|---|\n| `idPaciente` | `1` | ID del paciente que solicita la cita |\n| `idMedico` | `1` | ID del médico asignado |\n| `idEspecialidad` | `5` | Especialidad requerida (no pertenece al médico) |\n| `fechaCita` | `2025-11-11` | Fecha de la cita |\n| `horaCita` | `10:00:00` | Hora de la cita |\n| `motivoCita` | `Consulta` | Motivo de la consulta |\n\n## Respuesta Esperada\n\n- **HTTP Status:** `400 Bad Request`\n- El cuerpo de la respuesta debe contener un mensaje de error indicando que el médico no posee la especialidad solicitada.\n\n## Propósito\n\nValidar la regla de negocio que garantiza que un médico solo puede atender citas dentro de sus especialidades registradas, evitando asignaciones incorrectas."
           },
           "response": []
         },
@@ -1597,7 +1613,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Validación - Creación de cita en fin de semana (sábado)\n\nEste request valida que la API **rechace correctamente** la creación de una cita médica cuando la fecha proporcionada corresponde a un **día de fin de semana** (sábado o domingo). En este caso de prueba se utiliza el **8 de noviembre de 2025**, que es un **sábado**.\n\nEl sistema no debe permitir agendar citas en días no laborables, por lo que se espera que la API retorne un error indicando que la fecha seleccionada no es válida para la programación de citas.\n\n---\n\n## Endpoint\n\n**POST** `{{base_url}}{{api_path}}/citas`\n\n---\n\n## Encabezados (Headers)\n\n| Clave          | Valor              |\n|----------------|--------------------|\n| `Content-Type` | `application/json` |\n\n---\n\n## Cuerpo de la solicitud (Request Body)\n\n```json\n{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-08\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}\n```\n\n### Descripción de los campos\n\n| Campo          | Tipo     | Descripción                                                                 |\n|----------------|----------|-----------------------------------------------------------------------------|\n| `idPaciente`   | `integer` | Identificador único del paciente que solicita la cita.                     |\n| `idMedico`     | `integer` | Identificador único del médico con quien se agenda la cita.                |\n| `idEspecialidad` | `integer` | Identificador de la especialidad médica asociada a la cita.              |\n| `fechaCita`    | `string`  | Fecha de la cita en formato `YYYY-MM-DD`. En este caso `2025-11-08` (sábado). |\n| `horaCita`     | `string`  | Hora de la cita en formato `HH:MM:SS`.                                     |\n| `motivoCita`   | `string`  | Motivo o descripción breve de la consulta médica.                          |\n\n---\n\n## Comportamiento esperado\n\nLa API debe **rechazar** la solicitud debido a que la fecha `2025-11-08` corresponde a un **sábado**, que es un día no laborable. Se espera una respuesta de error con un código HTTP apropiado (por ejemplo, `400 Bad Request`) y un mensaje que indique que no es posible agendar citas en fines de semana.\n\n### Ejemplo de respuesta esperada\n\n```json\n{\n  \"error\": \"No es posible agendar citas en días de fin de semana.\"\n}\n```\n\n---\n\n## Propósito de la prueba\n\nEsta validación forma parte de las pruebas de **reglas de negocio** del sistema de gestión de citas médicas. Garantiza que el API aplique correctamente las restricciones de disponibilidad, evitando que los pacientes agenden citas en días en los que no hay atención médica disponible."
           },
           "response": []
         },
@@ -1627,7 +1644,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Validación - Creación de cita en fin de semana (domingo)\n\nEste request valida que la API **rechace correctamente** la creación de una cita médica cuando la fecha proporcionada corresponde a un **día de fin de semana** (domingo).\n\n---\n\n### 🗓️ Escenario de prueba\n\nLa fecha utilizada en el cuerpo de la solicitud es **`2025-11-09`**, que corresponde a un **domingo**. El sistema debe detectar que esta fecha cae en fin de semana y devolver un error de validación, impidiendo que la cita sea agendada.\n\n---\n\n### ✅ Comportamiento esperado\n\n- **La API no debe permitir** agendar citas médicas en días de fin de semana (sábado o domingo).\n- Se espera una respuesta de **error de validación** (por ejemplo, `400 Bad Request`) indicando que la fecha seleccionada no es válida para agendar una cita.\n\n---\n\n### 📋 Campos del cuerpo de la solicitud\n\n| Campo           | Tipo    | Descripción                                      |\n|-----------------|---------|--------------------------------------------------|\n| `idPaciente`    | Integer | Identificador único del paciente                 |\n| `idMedico`      | Integer | Identificador único del médico                   |\n| `idEspecialidad`| Integer | Identificador de la especialidad médica          |\n| `fechaCita`     | String  | Fecha de la cita en formato `YYYY-MM-DD` (domingo en este caso) |\n| `horaCita`      | String  | Hora de la cita en formato `HH:MM:SS`            |\n| `motivoCita`    | String  | Motivo o razón de la consulta médica             |\n\n---\n\n### 📝 Ejemplo de cuerpo de la solicitud\n\n```json\n{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-09\",\n  \"horaCita\": \"09:00:00\",\n  \"motivoCita\": \"Consulta\"\n}\n```\n\n---\n\n### ⚠️ Nota para desarrolladores\n\nEsta prueba forma parte de las validaciones de reglas de negocio del sistema de gestión de citas médicas. Asegúrese de que la lógica del servidor verifique el día de la semana antes de persistir cualquier cita en la base de datos."
           },
           "response": []
         },
@@ -1657,7 +1675,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Validación - Hora de almuerzo (12:00)\n\nThis request is a **validation test case** that verifies the system's behavior when a medical appointment is scheduled at **lunch time (12:00)**. It tests whether the API correctly handles or rejects appointment bookings during the lunch break hour.\n\n---\n\n### Request Details\n\n| Property      | Value                              |\n|---------------|------------------------------------|\n| **Method**    | `POST`                             |\n| **URL**       | `{{base_url}}{{api_path}}/citas`   |\n| **Content-Type** | `application/json`              |\n\n---\n\n### Request Body\n\n```json\n{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"12:00:00\",\n  \"motivoCita\": \"Consulta\"\n}\n```\n\n#### Body Fields\n\n| Field           | Type             | Description                                              |\n|-----------------|------------------|----------------------------------------------------------|\n| `idPaciente`    | `number`         | Patient ID — identifies the patient for the appointment  |\n| `idMedico`      | `number`         | Doctor ID — identifies the doctor for the appointment    |\n| `idEspecialidad`| `number`         | Specialty ID — identifies the medical specialty          |\n| `fechaCita`     | `string` (date)  | Appointment date in `YYYY-MM-DD` format                  |\n| `horaCita`      | `string` (time)  | Appointment time in `HH:MM:SS` format — set to `12:00:00` (lunch hour) |\n| `motivoCita`    | `string`         | Reason or motive for the appointment                     |\n\n---\n\n### Validation Note\n\n> ⚠️ **Test Case Purpose:** This case specifically targets the **12:00:00** time slot to validate whether the system enforces a lunch break restriction. The expected behavior is that the API should **reject** appointments scheduled during the lunch hour (12:00), returning an appropriate error response. This ensures that business rules around doctor availability during lunch time are correctly applied."
           },
           "response": []
         },
@@ -1687,7 +1706,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Validación - Horario inválido (17:00)\n\nEste caso de prueba verifica que la API rechaza correctamente la creación de una cita médica cuando se proporciona un horario inválido (17:00), es decir, fuera del rango de horas permitidas por el sistema.\n\n---\n\n### Encabezados de la solicitud\n\n| Clave         | Valor            |\n|---------------|------------------|\n| Content-Type  | application/json |\n\n---\n\n### Cuerpo de la solicitud\n\n```json\n{\n  \"idPaciente\": 1,\n  \"idMedico\": 1,\n  \"idEspecialidad\": 1,\n  \"fechaCita\": \"2025-11-10\",\n  \"horaCita\": \"17:00:00\",\n  \"motivoCita\": \"Consulta\"\n}\n```\n\n| Campo          | Valor        | Descripción                                              |\n|----------------|--------------|----------------------------------------------------------|\n| `idPaciente`   | `1`          | ID del paciente                                          |\n| `idMedico`     | `1`          | ID del médico                                            |\n| `idEspecialidad` | `1`        | ID de la especialidad médica                             |\n| `fechaCita`    | `2025-11-10` | Fecha de la cita                                         |\n| `horaCita`     | `17:00:00`   | Hora de la cita (inválida, fuera del horario permitido)  |\n| `motivoCita`   | `\"Consulta\"` | Motivo de la consulta                                    |\n\n---\n\n### Comportamiento esperado\n\nLa API debe retornar una respuesta de error indicando que la hora proporcionada (`17:00:00`) no es válida o no está dentro del horario de atención permitido. Se espera un código de estado de error (por ejemplo, `400 Bad Request`) junto con un mensaje descriptivo del problema."
           },
           "response": []
         },
@@ -1717,7 +1737,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "Verifica que el sistema **rechace la creación de una cita duplicada** cuando el médico ya tiene una cita registrada en la misma fecha y hora.\n\n## Escenario\n\nSe intenta agendar una cita para el **médico con ID 1**, en la misma fecha (`2025-11-12`) y hora (`14:00:00`) que una cita ya existente. El sistema debe detectar el conflicto y devolver un error.\n\n## Request Body\n\n| Campo          | Valor           | Descripción                          |\n|----------------|-----------------|--------------------------------------|\n| `idPaciente`   | `2`             | ID del paciente que solicita la cita |\n| `idMedico`     | `1`             | ID del médico asignado               |\n| `idEspecialidad` | `1`           | ID de la especialidad requerida      |\n| `fechaCita`    | `2025-11-12`    | Fecha de la cita (conflicto)         |\n| `horaCita`     | `14:00:00`      | Hora de la cita (conflicto)          |\n| `motivoCita`   | `Primera cita`  | Motivo de la consulta                |\n\n## Respuesta Esperada\n\n- **Código HTTP:** `409 Conflict`\n- **Motivo:** El médico ya tiene una cita agendada en esa fecha y hora. No se permite el doble agendamiento.\n\n## Variables de Entorno\n\n| Variable     | Descripción                        |\n|--------------|------------------------------------|\n| `base_url`   | URL base del servidor (ej. `http://localhost:8080`) |\n| `api_path`   | Prefijo de la API (ej. `/api`)     |"
           },
           "response": []
         },
@@ -1747,7 +1768,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "Verifica que el sistema rechace la creación de una cita cuando la fecha proporcionada es anterior a la fecha actual.\n\n## Caso de prueba\n\nEste request envía una fecha en el pasado (`2020-01-01`) para comprobar que la API aplica correctamente la validación de fechas y retorna un error apropiado.\n\n## Request Body\n\n| Campo          | Valor        | Descripción                          |\n|----------------|--------------|--------------------------------------|\n| idPaciente     | 1            | ID del paciente                      |\n| idMedico       | 1            | ID del médico                        |\n| idEspecialidad | 1            | ID de la especialidad                |\n| fechaCita      | 2020-01-01   | Fecha en el pasado (inválida)        |\n| horaCita       | 09:00:00     | Hora de la cita                      |\n| motivoCita     | Consulta     | Motivo de la consulta                |\n\n## Respuesta esperada\n\n- **HTTP Status:** `400 Bad Request`\n- El cuerpo de la respuesta debe contener un mensaje de error indicando que la fecha de la cita no puede ser en el pasado."
           },
           "response": []
         },
@@ -1777,7 +1799,8 @@
               "path": [
                 "citas"
               ]
-            }
+            },
+            "description": "## Validación - Campos Obligatorios\n\nEste request verifica que la API aplique correctamente la validación de **campos obligatorios** al momento de crear una nueva cita médica. El objetivo es confirmar que el servidor retorna un error apropiado cuando alguno de los campos requeridos está ausente o contiene un valor inválido.\n\n---\n\n### Endpoint\n\n```\nPOST {{base_url}}{{api_path}}/citas\n```\n\n---\n\n### Campos del cuerpo de la solicitud (Request Body)\n\nEl cuerpo debe enviarse en formato `JSON`. Los siguientes campos son **obligatorios**:\n\n| Campo        | Tipo             | Formato      | Descripción                                      |\n|--------------|------------------|--------------|--------------------------------------------------|\n| `idPaciente` | `number`         | —            | ID del paciente para quien se agenda la cita.    |\n| `idMedico`   | `number`         | —            | ID del médico que atenderá la cita.              |\n| `fechaCita`  | `string` (fecha) | `YYYY-MM-DD` | Fecha en que se realizará la cita médica.        |\n| `horaCita`   | `string` (hora)  | `HH:MM:SS`   | Hora en que se realizará la cita médica.         |\n| `motivoCita` | `string`         | —            | Motivo o razón por la cual se solicita la cita.  |\n\n---\n\n### Propósito del caso de prueba\n\nEste caso de prueba valida que la API **no permita crear una cita médica** cuando uno o más campos obligatorios están ausentes o son inválidos. Se espera que el sistema aplique las reglas de validación definidas y rechace la solicitud de forma controlada.\n\n---\n\n### Comportamiento esperado\n\nCuando se omite o se envía un valor inválido en alguno de los campos obligatorios, la API debe responder con:\n\n- **Código de estado HTTP:** `400 Bad Request`\n- **Cuerpo de respuesta:** Un mensaje de error descriptivo que indique cuál o cuáles campos fallaron la validación.\n\n> ⚠️ Este request está diseñado para probar escenarios de error. No se espera una creación exitosa de la cita."
           },
           "response": []
         },
@@ -1815,7 +1838,8 @@
                   "type": "text"
                 }
               ]
-            }
+            },
+            "description": "Actualiza el estado de una cita médica de **PENDIENTE** a **CONFIRMADA**.\n\n## Endpoint\n\n`PATCH {{base_url}}{{api_path}}/citas/{id}/estado`\n\n## Parámetros de ruta\n\n| Parámetro | Tipo    | Descripción                          |\n|-----------|---------|--------------------------------------|\n| `id`      | integer | ID único de la cita médica a actualizar. En este ejemplo se usa el ID `21`. |\n\n## Cuerpo de la solicitud\n\nEl cuerpo debe enviarse en formato JSON con el nuevo estado deseado.\n\n```json\n{\n  \"nuevoEstado\": \"CONFIRMADA\"\n}\n```\n\n### Campos\n\n| Campo        | Tipo   | Requerido | Descripción                                                                 |\n|--------------|--------|-----------|-----------------------------------------------------------------------------|\n| `nuevoEstado`| string | Sí        | El nuevo estado de la cita. Valor esperado en este flujo: `\"CONFIRMADA\"`. |\n\n## Variables de entorno\n\n| Variable    | Descripción                              | Ejemplo                  |\n|-------------|------------------------------------------|--------------------------|\n| `base_url`  | URL base del servidor                    | `http://localhost:8080`  |\n| `api_path`  | Prefijo de la ruta de la API             | `/api`                   |\n\n## Respuesta esperada\n\nUna respuesta exitosa devuelve un código `200 OK` con los datos actualizados de la cita, confirmando que el estado fue cambiado a `CONFIRMADA`.\n\n## Notas\n\n- Este endpoint forma parte del flujo de gestión de citas médicas.\n- Solo se puede confirmar una cita que se encuentre en estado `PENDIENTE`.\n- Asegúrate de enviar el encabezado `Content-Type: application/json` en la solicitud."
           },
           "response": []
         },
@@ -1852,7 +1876,8 @@
                   "value": "application/json"
                 }
               ]
-            }
+            },
+            "description": "Cambia el estado de una cita médica de **CONFIRMADA** a **COMPLETADA**.\n\nEste endpoint representa la transición final del ciclo de vida de una cita: una vez que la consulta médica ha sido atendida, se marca como completada. Solo es posible completar citas que se encuentren previamente en estado `CONFIRMADA`.\n\n> **Nota:** Las citas en estado `COMPLETADA` no pueden ser modificadas ni eliminadas.\n\n---\n\n## Endpoint\n\n```\nPATCH {{base_url}}{{api_path}}/citas/{id}/estado\n```\n\n| Parámetro | Tipo   | Ubicación | Descripción                        |\n|-----------|--------|-----------|------------------------------------|\n| `id`      | integer | path     | ID único de la cita médica         |\n\n---\n\n## Request Body\n\n```json\n{\n  \"nuevoEstado\": \"COMPLETADA\"\n}\n```\n\n| Campo         | Tipo   | Requerido | Descripción                                      |\n|---------------|--------|-----------|--------------------------------------------------|\n| `nuevoEstado` | string | Sí        | Nuevo estado a asignar. Debe ser `COMPLETADA`.   |\n\n---\n\n## Flujo de estados\n\n```\nPENDIENTE → CONFIRMADA → COMPLETADA\n```\n\nEsta solicitud ejecuta la transición: `CONFIRMADA → COMPLETADA`.\n\n---\n\n## Respuestas esperadas\n\n| Código | Descripción                                                                 |\n|--------|-----------------------------------------------------------------------------|\n| `200`  | Estado actualizado correctamente. Retorna la cita con el nuevo estado.      |\n| `400`  | Transición de estado inválida (p. ej., la cita no está en estado `CONFIRMADA`). |\n| `404`  | No se encontró una cita con el ID especificado.                             |\n\n---\n\n## Variables de entorno\n\n| Variable     | Ejemplo                  | Descripción              |\n|--------------|--------------------------|--------------------------|\n| `base_url`   | `http://localhost:8080`  | URL base del servidor    |\n| `api_path`   | `/api/v1`                | Prefijo de la ruta API   |"
           },
           "response": []
         },
@@ -1889,7 +1914,8 @@
                   "value": "application/json"
                 }
               ]
-            }
+            },
+            "description": "## Cambiar estado de cita: COMPLETADA → PENDIENTE\n\nRevierte el estado de una cita médica de **COMPLETADA** a **PENDIENTE**. Esto es útil cuando una cita marcada como completada necesita ser reprogramada o revisada.\n\n**Método:** `PATCH`  \n**Endpoint:** `{{base_url}}{{api_path}}/citas/{id}/estado`\n\n---\n\n### Parámetros de ruta\n\n| Parámetro | Tipo    | Requerido | Descripción                              |\n|-----------|---------|-----------|------------------------------------------|\n| `id`      | integer | Sí        | Identificador único de la cita médica.   |\n\n> En este ejemplo se usa el ID `21`.\n\n---\n\n### Cuerpo de la solicitud\n\nEl cuerpo debe enviarse en formato **JSON**.\n\n| Campo         | Tipo   | Requerido | Descripción                                      |\n|---------------|--------|-----------|--------------------------------------------------|\n| `nuevoEstado` | string | Sí        | El nuevo estado a asignar. Valor: `\"PENDIENTE\"`. |\n\n**Ejemplo:**\n```json\n{\n  \"nuevoEstado\": \"PENDIENTE\"\n}\n```\n\n---\n\n### Variables de entorno\n\n| Variable   | Descripción                                      |\n|------------|--------------------------------------------------|\n| `base_url` | URL base del servidor (ej. `http://localhost:8080`) |\n| `api_path` | Prefijo de la ruta de la API (ej. `/api/v1`)     |\n\n---\n\n### Respuestas esperadas\n\n| Código | Descripción                                                                 |\n|--------|-----------------------------------------------------------------------------|\n| `200`  | Estado actualizado correctamente. Retorna los datos actualizados de la cita. |\n| `400`  | Solicitud inválida. El estado proporcionado no es válido o la transición no está permitida. |\n| `404`  | No se encontró una cita con el ID especificado.                             |\n| `500`  | Error interno del servidor.                                                 |\n\n---\n\n### Flujo de estados\n\nLa transición `COMPLETADA → PENDIENTE` permite reabrir una cita que ya fue marcada como finalizada, retornándola al estado inicial del flujo de atención."
           },
           "response": []
         },
@@ -1926,7 +1952,8 @@
                   "value": "application/json"
                 }
               ]
-            }
+            },
+            "description": "Intenta actualizar el estado de una cita médica enviando un valor de estado inválido (`\"HELLOWORLD\"`), con el objetivo de verificar que la API rechaza correctamente los valores no permitidos.\n\n## Endpoint\n\n`PATCH /api/citas/{id}/estado`\n\n## Parámetros de ruta\n\n| Parámetro | Tipo    | Descripción                        |\n|-----------|---------|------------------------------------|\n| `id`      | integer | ID de la cita médica a actualizar  |\n\n## Cuerpo de la solicitud\n\n```json\n{\n  \"nuevoEstado\": \"HELLOWORLD\"\n}\n```\n\n| Campo         | Tipo   | Descripción                                                                 |\n|---------------|--------|-----------------------------------------------------------------------------|\n| `nuevoEstado` | string | Nuevo estado para la cita. Debe ser un valor válido del enum de estados. El valor `\"HELLOWORLD\"` es inválido y debe provocar un error de validación. |\n\n## Respuesta esperada\n\nSe espera una respuesta de error (por ejemplo, `400 Bad Request`) indicando que el valor proporcionado no es un estado válido para una cita médica.\n\n## Notas\n\n- Este caso de prueba valida el manejo de errores de la API ante entradas inválidas en el campo `nuevoEstado`.\n- Los valores válidos para `nuevoEstado` son los definidos en el enum de estados de citas del sistema (por ejemplo: `PENDIENTE`, `CONFIRMADA`, `CANCELADA`, etc.)."
           },
           "response": []
         },
@@ -1963,7 +1990,8 @@
                   "type": "text"
                 }
               ]
-            }
+            },
+            "description": "## Actualizar fecha y hora de cita\n\nEste endpoint permite actualizar la fecha, hora y motivo de una cita médica existente en el sistema, identificada por su ID en la URL.\n\n**Método HTTP:** `PUT`\n\n**URL:** `{{base_url}}{{api_path}}/citas/22`\n\n> **Nota:** El parámetro `Content-Type=application/json` se envía como query param en la URL. Asegúrese de que el servidor lo procese correctamente o considere moverlo a los headers de la solicitud si es necesario.\n\n---\n\n### Cuerpo de la solicitud (Body)\n\nEl cuerpo debe enviarse en formato **JSON** (`raw`) con los siguientes campos:\n\n| Campo        | Tipo   | Formato      | Descripción                                      |\n|--------------|--------|--------------|--------------------------------------------------|\n| `fechaCita`  | string | `YYYY-MM-DD` | Nueva fecha para la cita médica                  |\n| `horaCita`   | string | `HH:mm:ss`   | Nueva hora para la cita médica                   |\n| `motivoCita` | string | —            | Motivo o razón actualizada de la cita médica     |\n\n**Ejemplo de cuerpo:**\n\n```json\n{\n  \"fechaCita\": \"2025-11-28\",\n  \"horaCita\": \"13:00:00\",\n  \"motivoCita\": \"Consulta actualizada\"\n}\n```\n\n---\n\n### Notas de uso\n\n- El ID de la cita (`22`) está incluido directamente en la URL. Para actualizar otras citas, reemplace este valor con el ID correspondiente.\n- Todos los campos del cuerpo deben proporcionarse para garantizar una actualización completa de la cita.\n- Se recomienda verificar que la nueva fecha y hora no generen conflictos con otras citas ya registradas en el sistema."
           },
           "response": []
         },
@@ -1999,7 +2027,8 @@
                   "value": "application/json"
                 }
               ]
-            }
+            },
+            "description": "Intenta modificar los datos de una cita médica que ya se encuentra en estado **COMPLETADA**.\n\nEste caso valida que el sistema **rechace correctamente** cualquier intento de actualización sobre citas que han sido marcadas como completadas, garantizando la integridad del historial médico.\n\n## Comportamiento esperado\n\nEl servidor debe responder con un error (generalmente `400 Bad Request` o `409 Conflict`) indicando que no es posible modificar una cita en estado `COMPLETADA`.\n\n## Parámetros de ruta\n\n| Parámetro | Tipo    | Descripción                              |\n|-----------|---------|------------------------------------------|\n| `id`      | Integer | ID de la cita a actualizar (ej. `21`)    |\n\n## Cuerpo de la solicitud\n\n```json\n{\n  \"motivoCita\": \"Intento de actualización\"\n}\n```\n\n| Campo        | Tipo   | Descripción                                      |\n|--------------|--------|--------------------------------------------------|\n| `motivoCita` | String | Nuevo motivo de la cita (no será aplicado)       |\n\n## Variables de entorno utilizadas\n\n| Variable    | Descripción                        |\n|-------------|-------------------------------------|\n| `base_url`  | URL base del servidor (ej. `http://localhost:8080`) |\n| `api_path`  | Prefijo de la API (ej. `/api`)     |\n\n## Notas\n\n- La cita con ID `21` debe existir y estar en estado `COMPLETADA` para que este caso de prueba sea válido.\n- Este request forma parte de las validaciones de negocio del módulo de **Citas**."
           },
           "response": []
         },
@@ -2024,7 +2053,8 @@
                 "citas",
                 "22"
               ]
-            }
+            },
+            "description": "Elimina una cita médica cuyo estado es **PENDIENTE**.\n\nSolo se permite eliminar citas que se encuentren en estado `PENDIENTE`. Si la cita tiene un estado diferente (por ejemplo, `CONFIRMADA` o `COMPLETADA`), la operación será rechazada.\n\n**Parámetros de ruta:**\n- `id` (número, requerido): Identificador único de la cita a eliminar. En este ejemplo se usa el ID `22`.\n\n**Respuestas posibles:**\n- `204 No Content`: La cita fue eliminada exitosamente.\n- `400 Bad Request`: La cita no puede eliminarse porque su estado no es `PENDIENTE`.\n- `404 Not Found`: No existe una cita con el ID proporcionado.\n\n**Variables de entorno utilizadas:**\n- `{{base_url}}`: URL base del servidor (ej. `http://localhost:8080`).\n- `{{api_path}}`: Prefijo de la ruta de la API (ej. `/api`)."
           },
           "response": []
         },
@@ -2049,7 +2079,8 @@
                 "citas",
                 "21"
               ]
-            }
+            },
+            "description": "Intenta eliminar una cita médica que ya se encuentra en estado **COMPLETADA**, verificando que el sistema rechace correctamente esta operación.\n\n## Descripción\n\nEste caso de prueba negativo valida que la API **no permite eliminar** citas que han finalizado su ciclo de vida (estado `COMPLETADA`). La cita con ID `21` ha sido previamente llevada al estado `COMPLETADA` mediante los casos de cambio de estado en esta misma carpeta.\n\n## Endpoint\n\n```\nDELETE {{base_url}}{{api_path}}/citas/21\n```\n\n| Parámetro | Tipo | Descripción |\n|-----------|------|-------------|\n| `21` | Path param | ID de la cita en estado COMPLETADA |\n\n## Comportamiento esperado\n\nLa API debe rechazar la solicitud y devolver un error indicando que no es posible eliminar una cita en estado `COMPLETADA`.\n\n| Campo | Valor esperado |\n|-------|----------------|\n| HTTP Status | `400 Bad Request` o `409 Conflict` |\n| Mensaje | Indicación de que la cita no puede eliminarse por su estado actual |\n\n## Contexto de prueba\n\n- La cita `21` es utilizada a lo largo de la carpeta **Citas** para pruebas de transición de estado y casos negativos.\n- Para ver la eliminación exitosa de una cita, consultar el request **Eliminar cita PENDIENTE** (cita `22`).\n- Las variables `{{base_url}}` y `{{api_path}}` se configuran en el entorno **Local Development**."
           },
           "response": []
         }
